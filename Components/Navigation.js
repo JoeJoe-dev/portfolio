@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function NavigationBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,44 +18,52 @@ export default function NavigationBar() {
       {/* Main Content */}
       <div className="relative ">
         {/* Background Split */}
-        <div className="absolute inset-0 h-screen">
+        <div className="absolute inset-0">
           {/* Left gray section */}
-          {/* <div className="absolute left-0 top-0 bottom-0 w-[55%] bg-gray-200" /> */}
+          <div className="absolute left-0 top-0 bottom-0 w-[63%] bg-gray-200" />
           
           {/* Right black section */}
-          {/* <div className="absolute right-0 top-0 bottom-0 w-[45%] bg-black" /> */}
+          <div className="absolute right-0 top-0 bottom-0 w-[37%] bg-black" />
           
           {/* Diagonal transition */}
           <div 
             className="absolute top-0 bottom-0 w-32 bg-gray-200" 
             style={{
               left: '55%',
-              transform: 'skewX(-10deg)',
-              transformOrigin: 'top left',
+              transform: 'skewX(-9deg)',
+              transformOrigin: 'bottom left',
             }}
           />
         </div>
 
         {/* Navigation */}
-        <div className="container mx-auto px-8">
+        <div className="relative container mx-auto px-8">
             <div className="flex items-center justify-end h-16">
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-                {navItems.map((item) => (
-                <Link
-                    key={item.label}
-                    href={item.href}
-                    className="text-white hover:text-gray-300 transition-colors font-medium"
-                >
-                    {item.label}
-                </Link>
-                ))}
-                <Link
-                href="#contact"
-                className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition-colors font-medium"
-                >
-                CONTACT ME
-                </Link>
+            <div className="hidden md:grid md:grid-cols-3 md:gap-12 w-full items-center gap-8">
+                <Image 
+                href="/portfolio/assets/logo.png"
+                alt=''
+                className="col-span-2 mb-4 w-10 h-10 relative"
+                />
+                
+                <div className='md:flex gap-8'>
+                    {navItems.map((item) => (
+                        <Link
+                            key={item.label}
+                            href={item.href}
+                            className="text-white hover:text-gray-300 transition-colors font-medium"
+                        >
+                            {item.label}
+                        </Link>
+                    ))}
+                    <Link
+                        href="#contact"
+                        className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition-colors font-medium"
+                        >
+                        CONTACT ME
+                    </Link>
+                </div>
             </div>
 
             {/* Mobile Menu Button */}

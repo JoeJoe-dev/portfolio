@@ -5,11 +5,21 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  /* Custom Colors */
+  --color-portfolio-gray: #E5E5E5;
+  --color-portfolio-dark: #1A1A1A;
+  --color-portfolio-black: #000000;
+
+  /* Custom Letter Spacing */
+  --tracking-widest-extra: 0.2em;
+
+  --font-raleway: var(--font-raleway);
+  
+  /* Applying it as the default sans font */
+  --font-sans: var(--font-raleway);
+  
+  /* You can even define custom animations here if needed */
 }
 
 @media (prefers-color-scheme: dark) {

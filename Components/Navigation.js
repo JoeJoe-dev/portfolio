@@ -1,118 +1,79 @@
-'use client';
-
+"use client";
 import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import { Menu, X } from 'lucide-react';
 
-export default function NavigationBar() {
+export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navItems = [
-    { label: 'About me', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Portfolio', href: '#portfolio' },
+  const navLinks = [
+    { name: "About me", href: "#about" },
+    { name: "Skills", href: "#skills" },
+    { name: "Portfolio", href: "#portfolio" },
   ];
 
   return (
-    <nav className="bg-black text-white fixed top-0 left-0 right-0 z-50 shadow-lg">
-      {/* Main Content */}
-      <div className="relative ">
-        {/* Background Split */}
-        <div className="absolute inset-0">
-          {/* Left gray section */}
-          <div className="absolute left-0 top-0 bottom-0 w-[63%] bg-gray-200" />
-          
-          {/* Right black section */}
-          <div className="absolute right-0 top-0 bottom-0 w-[37%] bg-black" />
-          
-          {/* Diagonal transition */}
-          <div 
-            className="absolute top-0 bottom-0 w-32 bg-gray-200" 
-            style={{
-              left: '55%',
-              transform: 'skewX(-9deg)',
-              transformOrigin: 'bottom left',
-            }}
-          />
+    <nav className="absolute top-0 w-full z-50 font-sans bg-black ">
+       <div 
+        className="absolute inset-0 bg-[#E5E5E5] z-10"
+        style={{ clipPath: 'polygon(0 0, 48.7% 0%, 47.6% 100%, 0% 100%)' }}
+      ></div>
+
+      <div className="flex justify-between items-center px-6 md:px-24 py-6 relative z-20">
+        {/* Logo - Adjusted to KJ for Kalu Joseph */}
+        <div className="text-2xl font-bold tracking-tighter z-50">
+          <span className=" px-2 py-1 text-black">
+            Kalu Joseph
+          </span>
         </div>
 
-        {/* Navigation */}
-        <div className="relative container mx-auto px-8">
-            <div className="flex items-center justify-end h-16">
-            {/* Desktop Navigation */}
-            <div className="hidden md:grid md:grid-cols-3 md:gap-12 w-full items-center gap-8">
-                <Image 
-                href="/portfolio/assets/logo.png"
-                alt=''
-                className="col-span-2 mb-4 w-10 h-10 relative"
-                />
-                
-                <div className='md:flex gap-8'>
-                    {navItems.map((item) => (
-                        <Link
-                            key={item.label}
-                            href={item.href}
-                            className="text-white hover:text-gray-300 transition-colors font-medium"
-                        >
-                            {item.label}
-                        </Link>
-                    ))}
-                    <Link
-                        href="#contact"
-                        className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition-colors font-medium"
-                        >
-                        CONTACT ME
-                    </Link>
-                </div>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden p-2 text-white"
-                aria-label="Toggle menu"
-            >
-                <svg
-                className="w-6 h-6"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                >
-                {isOpen ? (
-                    <path d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                    <path d="M4 6h16M4 12h16M4 18h16" />
-                )}
-                </svg>
-            </button>
-            </div>
-
-            {/* Mobile Menu */}
-            {isOpen && (
-            <div className="md:hidden pb-4">
-                {navItems.map((item) => (
-                <Link
-                    key={item.label}
-                    href={item.href}
-                    className="block py-2 text-white hover:text-gray-300 transition-colors"
-                    onClick={() => setIsOpen(false)}
-                >
-                    {item.label}
-                </Link>
-                ))}
-                <Link
-                href="#contact"
-                className="block mt-2 bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200 transition-colors font-medium text-center"
-                onClick={() => setIsOpen(false)}
-                >
-                CONTACT ME
-                </Link>
-            </div>
-            )}
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-12">
+          <div className="flex gap-10 font-bold text-sm uppercase tracking-widest">
+            {navLinks.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.href} 
+                className="hover:text-gray-500 transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+          <button className="bg-white text-black px-8 py-3 rounded-full font-black text-xs shadow-md hover:bg-black hover:text-white transition-all duration-300 border-2 border-white">
+            CONTACT ME
+          </button>
         </div>
+
+        {/* Mobile Toggle Button */}
+        <button 
+          className="md:hidden z-50 p-2 text-black"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <X size={32} /> : <Menu size={32} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`
+        fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-500 ease-in-out md:hidden
+        ${isOpen ? "translate-x-0" : "translate-x-full"}
+      `}>
+        {navLinks.map((link) => (
+          <a 
+            key={link.name} 
+            href={link.href} 
+            onClick={() => setIsOpen(false)}
+            className="text-3xl font-black uppercase tracking-tighter hover:text-gray-500 transition-colors"
+          >
+            {link.name}
+          </a>
+        ))}
+        <button 
+          onClick={() => setIsOpen(false)}
+          className="mt-4 bg-black text-white px-10 py-4 rounded-full font-black text-sm"
+        >
+          CONTACT ME
+        </button>
       </div>
     </nav>
   );

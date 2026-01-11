@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +21,15 @@ export default function Navigation() {
 
       <div className="flex justify-between items-center px-6 md:px-24 py-6 relative z-20">
         {/* Logo - Adjusted to KJ for Kalu Joseph */}
+           {/* <div className="text-black relative w-10 h-10">
+             <Image 
+              src="/assets/logo_2.png" 
+              alt="Logo" 
+              fill 
+              className="object-contain w-[10rem]"
+              priority
+          /> 
+           </div>*/}
         <div className="text-2xl font-bold tracking-tighter z-50">
           <span className=" px-2 py-1 text-black">
             Kalu Joseph

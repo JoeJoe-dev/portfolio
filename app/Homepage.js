@@ -1,5 +1,7 @@
 "use client"
 import HeroHeader from '@/Components/HeroHeader';
+import ITberries from '@/Components/ITBerries';
+import AboutSection from '@/Components/AboutSection';
 
 export default function Homepage () {
     return(
@@ -8,6 +10,12 @@ export default function Homepage () {
 
             {/* Hero Header */}
             <HeroHeader />
+
+            {/* ITBerries */}
+            <ITberries />
+
+            {/* About Section */}
+            <AboutSection />
         </div>
     )
 }

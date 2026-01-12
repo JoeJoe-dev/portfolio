@@ -23,7 +23,7 @@ export default function Homepage () {
             <Skills />
 
             {/* Portfolio Section */}
-            <Portfoliosection />
+            <PortfolioSection />
         </div>
     )
 }

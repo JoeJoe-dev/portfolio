@@ -1,5 +1,6 @@
 import React from "react";
 import { Palette, Code, Wrench } from "lucide-react";
+import Link from "next/link";
 
 export default function AboutSection() {
   return (
@@ -22,16 +23,19 @@ export default function AboutSection() {
           satisfaction to the person using it. Whether I&apos;m building a sleek
           personal brand site or a complex platform for an organization, my goal
           is always the same: to create something captivating and intuitive that
-          gives you total control over your story.
+          gives the user the best of experience and total control over your
+          story.
         </p>
 
         {/* Explore Button */}
         <div className="flex justify-center mb-12">
           <div className="flex items-center gap-4">
             <div className="w-12 h-[2px] bg-black"></div>
-            <button className="text-black text-sm font-bold tracking-widest hover:opacity-70 transition-opacity">
-              EXPLORE
-            </button>
+            <Link href="/about" className="cursor-pointer">
+              <button className="text-black cursor-pointer text-sm font-bold tracking-widest hover:opacity-70 transition-opacity">
+                READ MORE
+              </button>
+            </Link>
             <div className="w-12 h-[2px] bg-black"></div>
           </div>
         </div>
@@ -64,11 +68,18 @@ export default function AboutSection() {
               </div>
             </div>
             <h3 className="text-xl font-bold text-black mb-4 tracking-wide">
-              DESIGN
+              WEB DESIGN
             </h3>
-            <p className="text-sm text-black leading-relaxed">
-              I can design the site based on your needs and suggestions. I can
-              also design the site from scratch and consult you during the job.
+            <p className="text-sm text-black text-justify leading-relaxed">
+              Recently, the primary friction for both recruiters and clients is
+              the &quot;Visual Disconnect&quot;, recruiters struggle to find
+              designers who understand how to build for actual code
+              implementation, while clients are tired of beautiful websites that
+              are impossible for non-tech users to manage. I solve this by
+              delivering high-performance, AI-optimized web designs that
+              prioritize both systematic consistency for professional dev teams
+              and total narrative control for business owners. I bridge the gap
+              between high-end aesthetics and practical usability.
             </p>
           </div>
 
@@ -80,11 +91,16 @@ export default function AboutSection() {
               </div>
             </div>
             <h3 className="text-xl font-bold text-black mb-4 tracking-wide">
-              DEVELOPMENT
+              WEB DEVELOPMENT
             </h3>
-            <p className="text-sm text-black leading-relaxed">
-              I can design the site based on your needs and suggestions. I can
-              also design the site from scratch and consult you during the job.
+            <p className="text-sm text-black text-justify leading-relaxed">
+              I eliminate the frustration of &apos;Rigid Codebases&apos; by
+              delivering high-performance, AI-accelerated solutions built for
+              both scale and simplicity. For recruiters, I prioritize modular,
+              industry-standard code that fits seamlessly into professional
+              engineering workflows. For clients, I ensure your platform is easy
+              to manage and strictly built to convert—creating a high-trust
+              experience that turns your visitors into loyal partners.
             </p>
           </div>
         </div>
@@ -97,11 +113,16 @@ export default function AboutSection() {
             </div>
           </div>
           <h3 className="text-xl font-bold text-black mb-4 tracking-wide">
-            MAINTENANCE
+            WEB MAINTENANCE
           </h3>
           <p className="text-sm text-black leading-relaxed">
-            I can design the site based on your needs and suggestions. I can
-            also design the site from scratch and consult you during the job.
+            The biggest risk for any website is &apos;Maintenance Abandonment&apos;, where
+            recruiters see a portfolio of broken links and outdated code, and
+            clients are left with a slow site they&apos;re afraid to update. 
+            I solve showing a commitment to clean, long-term code health and
+            performance optimization. For clients, I handle the technical
+            updates so your visitors always experience a professional,
+            high-trust environment that keeps your mission moving forward
           </p>
         </div>
 

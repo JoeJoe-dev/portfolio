@@ -114,7 +114,7 @@ export default function HeroHeader() {
         {/* Image Area */}
         <div className="w-full md:w-1/2 h-full flex items-end justify-center relative mt-[-10rem]">
           <img 
-            src="/assets/Heroheader_img(2).png" 
+            src="/assets/Images/Heroheader_img(2).png" 
             alt="Kalu Joseph"
             className="h-[80vh] object-contain z-30 animate-slide-right rounded-full"
           />

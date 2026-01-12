@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,11 +31,13 @@ export default function Navigation() {
               priority
           /> 
            </div>*/}
-        <div className="text-2xl font-bold tracking-tighter z-50">
+        <Link 
+        href="/"
+        className="text-2xl font-bold tracking-tighter z-50">
           <span className=" px-2 py-1 text-black">
             Kalu Joseph
           </span>
-        </div>
+        </Link>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-12">

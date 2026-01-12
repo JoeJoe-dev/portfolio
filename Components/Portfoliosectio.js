@@ -17,26 +17,24 @@ export default function PortfolioSection() {
       title: 'Paragon Website',
       description: 'Bootstrap, CSS3, HTML5, JS',
       image: project1Img,
-      demoLink: '#',
-      moreLink: '#',
+      demoLink: 'https://paragonwebsite.netlify.app',
+      moreLink: '/projects',
     },
     {
       id: 2,
       title: 'Mrs. Awosika Portfolio Website',
       description: 'Next.js, Tailwind CSS',
       image: project2Img,
-      demoLink: '#',
-      moreLink: '#',
+      demoLink: 'https://ibukunawosika.vercel.app',
+      moreLink: '/projects',
     },
     {
       id: 3,
-      title: 'Project Three',
-      category: 'CODED',
-      type: 'development',
-      description: 'Full Stack Application',
+      title: 'Samuel Book Website',
+      description: 'HTML5, CSS3, JS',
       image: project3Img,
-      demoLink: '#',
-      moreLink: '#',
+      demoLink: 'https://bookwebsite-test.netlify.app',
+      moreLink: '/project',
     },
     // {
     //   id: 4,
@@ -108,7 +106,7 @@ export default function PortfolioSection() {
 
       {/* Projects Grid */}
       <div className="max-w-7xl mx-auto py-16 px-8">
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 mb-[3rem]">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
@@ -125,13 +123,11 @@ export default function PortfolioSection() {
               </div>
 
               {/* Project Info Overlay */}
-              <div className="absolute group-hover:inset-0 bg-gradient-to-t from-black via-black/50 flex flex-col items-center justify-center text-center p-8">
+              <div className="absolute group-hover:inset-0 bg-gradient-to-t from-black via-black/70 flex flex-col 
+              items-center justify-center text-center p-8">
                 {/* Action Buttons */}
                 <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300
                      absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-                    <p className="text-xs text-gray-400 mb-2 tracking-widest uppercase">
-                        {project.type}
-                    </p>
                     <h3 className="text-4xl font-bold mb-4">{project.title}</h3>
                     <p className="text-sm text-gray-300 mb-6">{project.description}</p>
                     <div className="flex items-center gap-4">  
@@ -157,7 +153,6 @@ export default function PortfolioSection() {
           ))}
         </div>
 
-        {/* Footer Text */}
         <Link 
         href="/projects"
         className="text-center mt-16 text-gray-400 text-lg">

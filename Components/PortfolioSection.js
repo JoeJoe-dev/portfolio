@@ -129,7 +129,7 @@ export default function PortfolioSection() {
                 <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300
                      absolute inset-0 flex flex-col items-center justify-center text-center p-8">
                     <h3 className="text-4xl font-bold mb-4">{project.title}</h3>
-                    <p className="text-sm text-gray-300 mb-6">{project.description}</p>
+                    <p className="text-sm font-bold text-gray-300 mb-6">{project.description}</p>
                     <div className="flex items-center gap-4">  
                         <div className="w-12 h-[1px] bg-white"></div>
                         <a

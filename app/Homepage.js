@@ -3,7 +3,9 @@ import HeroHeader from '@/Components/HeroHeader';
 import ITberries from '@/Components/ITBerries';
 import AboutSection from '@/Components/AboutSection';
 import Skills from '@/Components/Skills';
-import PortfolioSection from '@/Components/Portfoliosectio';
+import PortfolioSection from '@/Components/PortfolioSection';
+import ContactSection from '@/Components/ContactSection';
+import Footer from '@/Components/Footer';
 
 export default function Homepage () {
     return(
@@ -24,6 +26,12 @@ export default function Homepage () {
 
             {/* Portfolio Section */}
             <PortfolioSection />
+
+            {/* Contact Section */}
+            <ContactSection />
+
+            {/* Footer */}
+            <Footer />
         </div>
     )
 }

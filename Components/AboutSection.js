@@ -1,13 +1,211 @@
-import React from "react";
+"use client";
+import React, { useEffect, useRef, useState } from "react";
 import { Palette, Code, Wrench } from "lucide-react";
 import Link from "next/link";
 
 export default function AboutSection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.2, // Trigger when 20% of the section is visible
+        rootMargin: "0px 0px -50px 0px"
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section className="bg-[#D5D5D5] py-20 px-8 font-sans">
+    <section 
+      ref={sectionRef}
+      className="bg-[#D5D5D5] py-20 px-8 font-sans" 
+      id="about"
+    >
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes fadeOutDown {
+          from {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+        }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        
+        @keyframes fadeOut {
+          from {
+            opacity: 1;
+          }
+          to {
+            opacity: 0;
+          }
+        }
+        
+        @keyframes scaleIn {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        
+        @keyframes scaleOut {
+          from {
+            opacity: 1;
+            transform: scale(1);
+          }
+          to {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+        }
+        
+        @keyframes slideInLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes slideOutLeft {
+          from {
+            opacity: 1;
+            transform: translateX(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateX(-50px);
+          }
+        }
+        
+        @keyframes slideInRight {
+          from {
+            opacity: 0;
+            transform: translateX(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes slideOutRight {
+          from {
+            opacity: 1;
+            transform: translateX(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateX(50px);
+          }
+        }
+        
+        .animate-fade-in-up {
+          animation: fadeInUp 0.8s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-fade-out-down {
+          animation: fadeOutDown 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in {
+          animation: fadeIn 0.6s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-fade-out {
+          animation: fadeOut 0.6s ease-out forwards;
+        }
+        
+        .animate-scale-in {
+          animation: scaleIn 0.6s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-scale-out {
+          animation: scaleOut 0.6s ease-out forwards;
+        }
+        
+        .animate-slide-left {
+          animation: slideInLeft 0.8s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-slide-out-left {
+          animation: slideOutLeft 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-right {
+          animation: slideInRight 0.8s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-slide-out-right {
+          animation: slideOutRight 0.8s ease-out forwards;
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.9s; }
+        .stagger-6 { animation-delay: 1s; }
+        .stagger-7 { animation-delay: 1.1s; }
+        .stagger-8 { animation-delay: 1.2s; }
+        
+        .hidden-initially {
+          opacity: 0;
+        }
+      `}</style>
+      
       <div className="max-w-4xl mx-auto">
         {/* Title */}
-        <div className="flex justify-center mb-8">
+        <div className={`flex justify-center mb-8 ${
+          isVisible ? 'animate-scale-in stagger-1' : 'animate-scale-out stagger-1'
+        }`}>
           <div className="border-4 border-black px-16 py-4">
             <h2 className="text-2xl font-bold tracking-[0.3em] text-black">
               ABOUT ME
@@ -16,7 +214,8 @@ export default function AboutSection() {
         </div>
 
         {/* Description */}
-        <p className="text-center text-sm text-black leading-relaxed mb-8 max-w-2xl mx-auto">
+        <p className={`text-center text-sm text-black leading-relaxed mb-8 max-w-2xl mx-auto 
+          ${isVisible ? 'animate-fade-in-up stagger-2' : 'animate-fade-out-down stagger-2'}`}>
           I&apos;m Kalu Joseph, a creative Frontend Developer and Website
           Designer based in Nigeria. I&apos;m a fast-learning, eager programmer
           who believes that excellence only counts if it brings true
@@ -28,7 +227,9 @@ export default function AboutSection() {
         </p>
 
         {/* Explore Button */}
-        <div className="flex justify-center mb-12">
+        <div className={`flex justify-center mb-12 ${
+          isVisible ? 'animate-fade-in stagger-3' : 'animate-fade-out stagger-3'
+        }`}>
           <div className="flex items-center gap-4">
             <div className="w-12 h-[2px] bg-black"></div>
             <Link href="/about" className="cursor-pointer">
@@ -41,7 +242,9 @@ export default function AboutSection() {
         </div>
 
         {/* Decorative Divider */}
-        <div className="flex justify-center items-center mb-16">
+        <div className={`flex justify-center items-center mb-16 ${
+          isVisible ? 'animate-fade-in stagger-4' : 'animate-fade-out stagger-4'
+        }`}>
           <div className="w-16 h-[2px] bg-black"></div>
           <div className="mx-3">
             <svg
@@ -61,7 +264,9 @@ export default function AboutSection() {
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 gap-12 mb-16">
           {/* Design */}
-          <div className="text-center">
+          <div className={`text-center ${
+            isVisible ? 'animate-slide-left stagger-5' : 'animate-slide-out-left stagger-5'
+          }`}>
             <div className="flex justify-center mb-4">
               <div className="w-16 h-16 rounded-full border-2 border-black flex items-center justify-center bg-transparent">
                 <Palette size={28} className="text-black" strokeWidth={1.5} />
@@ -84,7 +289,9 @@ export default function AboutSection() {
           </div>
 
           {/* Development */}
-          <div className="text-center">
+          <div className={`text-center ${
+            isVisible ? 'animate-slide-right stagger-6' : 'animate-slide-out-right stagger-6'
+          }`}>
             <div className="flex justify-center mb-4">
               <div className="w-16 h-16 rounded-full border-2 border-black flex items-center justify-center bg-transparent">
                 <Code size={28} className="text-black" strokeWidth={1.5} />
@@ -106,7 +313,9 @@ export default function AboutSection() {
         </div>
 
         {/* Maintenance - Centered */}
-        <div className="text-center max-w-md mx-auto mb-16">
+        <div className={`text-center max-w-md mx-auto mb-16 ${
+          isVisible ? 'animate-fade-in-up stagger-7' : 'animate-fade-out-down stagger-7'
+        }`}>
           <div className="flex justify-center mb-4">
             <div className="w-16 h-16 rounded-full border-2 border-black flex items-center justify-center bg-transparent">
               <Wrench size={28} className="text-black" strokeWidth={1.5} />
@@ -127,7 +336,9 @@ export default function AboutSection() {
         </div>
 
         {/* Bottom Decorative Divider */}
-        <div className="flex justify-center items-center">
+        <div className={`flex justify-center items-center ${
+          isVisible ? 'animate-fade-in stagger-8' : 'animate-fade-out stagger-8'
+        }`}>
           <div className="w-16 h-[2px] bg-black"></div>
           <div className="mx-3">
             <svg

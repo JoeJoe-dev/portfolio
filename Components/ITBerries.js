@@ -8,10 +8,10 @@ export default function ITberries() {
             Bridging the Gap Between AI-Enhanced Speed and Human-Centered Design.
         </h1>
 
-        <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 max-w-10xl">
+        <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 max-w-10xl text-justify">
           In this era, the primary barrier for any professional or
           organization—whether a solo entrepreneur, a growing business, or a
-          mission-driven NGO—is no longer just "getting a website," but avoiding
+          mission-driven NGO-is no longer just "getting a website," but avoiding
           the trap of technical dependency and unmanageable code. You deserve a
           digital presence that serves as a high-performance asset rather than a
           liability, yet too many visitors find themselves abandoned by "black

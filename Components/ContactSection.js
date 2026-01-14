@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef} from 'react';
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -22,11 +22,115 @@ export default function ContactSection() {
     setFormData({ name: "", email: "", phone: "", message: "" });
   };
 
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef(null);
+      
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+       ([entry]) => {
+              setIsVisible(entry.isIntersecting);
+            },
+            {
+              threshold: 0.2, // Trigger when 20% of the section is visible
+              rootMargin: "0px 0px -50px 0px"
+            }
+          );
+      
+          if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+          }
+      
+          return () => {
+            if (sectionRef.current) {
+              observer.unobserve(sectionRef.current);
+            }
+          };
+        }, []);
+
   return (
-    <section className="bg-[#D5D5D5] py-20 px-8 font-sans">
+    <section 
+    ref={sectionRef}
+    className="bg-[#D5D5D5] py-20 px-8 font-sans" id="contact">
+
+        <style>
+      {`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(100px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes fadeOutDown {
+          from {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+        }
+        
+        @keyframes scaleIn {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        
+        @keyframes scaleOut {
+          from {
+            opacity: 1;
+            transform: scale(1);
+          }
+          to {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+        }
+        
+        .animate-fade-in-up {
+          animation: fadeInUp 1s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-fade-out-down {
+          animation: fadeOutDown 0.8s ease-out forwards;
+        }
+        
+        .animate-scale-in {
+          animation: scaleIn 0.6s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-scale-out {
+          animation: scaleOut 0.6s ease-out forwards;
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 1.2s; }
+        
+        .hidden-initially {
+          opacity: 0;
+        }
+      `}
+    </style>
+
+
       <div className="max-w-2xl mx-auto">
         {/* Title */}
-        <div className="flex justify-center mb-8">
+        <div className={`flex justify-center mb-8 ${
+          isVisible ? 'animate-scale-in stagger-1' : 'animate-scale-out stagger-1'
+        }`}>
           <div className="border-4 border-gray-600 px-20 py-4 ">
             <h2 className="text-2xl font-bold tracking-[0.3em] text-gray-700">
               CONTACT
@@ -35,7 +139,10 @@ export default function ContactSection() {
         </div>
 
         {/* Description */}
-        <p className="text-center text-sm text-black leading-relaxed mb-8 max-w-xl mx-auto">
+        <p className={`text-center text-sm text-black leading-relaxed 
+        mb-8 max-w-xl mx-auto ${
+          isVisible ? 'animate-scale-in stagger-1' : 'animate-scale-out stagger-1'
+        }`}>
           Reach out to discuss a potential hire or a new website project. Let’s create a digital home that works for you
         </p>
 
@@ -58,7 +165,9 @@ export default function ContactSection() {
         </div>
 
         {/* Contact Form */}
-        <div className="space-y-6 text-black">
+        <div className={`space-y-6 text-black
+          ${isVisible ? 'animate-fade-in-up stagger-2' : 
+          'animate-fade-out-down stagger-2'}`}>
           {/* Name Input */}
           <div>
             <input

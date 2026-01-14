@@ -89,24 +89,33 @@ export default function HeroHeader() {
           {/* Refined Social Icons with Box Shadow */}
           <div className="flex gap-6 animate-fade-up stagger-4">
             <a 
-              href="mailto:your-email@example.com" 
-              className="bg-[#C4C4C4] p-4 rounded-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 text-black"
-            >
-              <Mail size={24} />
-            </a>
-            <a 
-              href="https://github.com" 
+              href="https://github.com/JoeJoe-dev" 
               target="_blank" 
               className="bg-[#C4C4C4] p-4 rounded-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 text-black"
             >
               <Github size={24} />
             </a>
             <a 
-              href="https://linkedin.com" 
+              href="https://www.linkedin.com/in/joseph-kalu-934506237" 
               target="_blank" 
               className="bg-[#C4C4C4] p-4 rounded-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 text-black"
             >
               <Linkedin size={24} />
+            </a>
+            <a 
+              href="https://x.com/JosephKalu001"
+              target="_blank"
+              className="bg-[#C4C4C4] p-4 rounded-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 text-black"
+            >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
             </a>
           </div>
         </div>

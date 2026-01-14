@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import Link from 'next/link';
 
 // Import your project images
@@ -62,11 +62,116 @@ export default function PortfolioSection() {
     ? projects 
     : projects.filter(project => project.category === activeFilter);
 
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+    
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+     ([entry]) => {
+            setIsVisible(entry.isIntersecting);
+          },
+          {
+            threshold: 0.2, // Trigger when 20% of the section is visible
+            rootMargin: "0px 0px -50px 0px"
+          }
+        );
+    
+        if (sectionRef.current) {
+          observer.observe(sectionRef.current);
+        }
+    
+        return () => {
+          if (sectionRef.current) {
+            observer.unobserve(sectionRef.current);
+          }
+        };
+      }, []);
+
   return (
-    <section className="bg-[#1a1a1a] text-white font-sans">
+    <section 
+    ref={sectionRef}
+    className="bg-[#1a1a1a] text-white font-sans">
+
+    <style>
+      {`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            hidden;
+            transform: translateY(100px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes fadeOutDown {
+          from {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+        }
+        
+        @keyframes scaleIn {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        
+        @keyframes scaleOut {
+          from {
+            opacity: 1;
+            transform: scale(1);
+          }
+          to {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+        }
+        
+        .animate-fade-in-up {
+          animation: fadeInUp 1s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-fade-out-down {
+          animation: fadeOutDown 0.8s ease-out forwards;
+        }
+        
+        .animate-scale-in {
+          animation: scaleIn 0.6s ease-out forwards;
+          opacity: 0;
+        }
+        
+        .animate-scale-out {
+          animation: scaleOut 0.6s ease-out forwards;
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 1.2s; }
+        
+        .hidden-initially {
+          opacity: 0;
+        }
+      `}
+    </style>
+
       {/* Hero Section with Background Image */}
       <div 
-        className="relative h-64 flex items-center justify-center bg-cover bg-center"
+        className={`relative h-64 flex items-center justify-center 
+        bg-cover bg-center ${
+          isVisible ? 'animate-scale-in stagger-1' : 'animate-scale-out stagger-1'
+        }`}
         style={{
           backgroundImage: 'url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200")',
         }}
@@ -77,26 +182,9 @@ export default function PortfolioSection() {
         </div>
       </div>
 
-      {/* Filter Tabs */}
-      {/* <div className="bg-[#0d0d0d] border-b border-gray-800">
-        <div className="max-w-7xl mx-auto flex justify-center gap-16 py-6">
-          {['ALL', 'CODED', 'DESIGNED'].map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`text-sm font-bold tracking-widest transition-colors ${
-                activeFilter === filter
-                  ? 'text-white border-b-2 border-white pb-1'
-                  : 'text-gray-500 hover:text-gray-300'
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
-      </div> */}
-
-       <div className="bg-[#0d0d0d] border-b border-gray-800">
+       <div className={`bg-[#0d0d0d] border-b border-gray-800 ${
+          isVisible ? 'animate-scale-in stagger-1' : 'animate-scale-out stagger-1'
+        }`}>
         <div className="max-w-7xl mx-auto flex justify-center gap-16 py-6">
             <button>
               LATEST PROJECTS
@@ -105,7 +193,9 @@ export default function PortfolioSection() {
       </div> 
 
       {/* Projects Grid */}
-      <div className="max-w-7xl mx-auto py-16 px-8">
+      <div className={`max-w-7xl mx-auto py-16 px-8
+          ${isVisible ? 'animate-fade-in-up stagger-2' : 
+          'animate-fade-out-down stagger-2'}`}>
         <div className="grid md:grid-cols-3 gap-8 mb-[3rem]">
           {filteredProjects.map((project) => (
             <div

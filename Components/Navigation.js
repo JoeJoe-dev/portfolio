@@ -1,7 +1,6 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Navigation() {
@@ -13,28 +12,50 @@ export default function Navigation() {
     { name: "Portfolio", href: "#portfolio" },
   ];
 
+  const handleScrollToSection = (e, href) => {
+    e.preventDefault();
+    setIsOpen(false);
+    
+    const targetId = href.replace('#', '');
+    
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        const navbarHeight = 100; // Adjust based on your navbar height
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - navbarHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      } else {
+        console.error(`Element with id "${targetId}" not found`);
+        console.log('Available IDs:', Array.from(document.querySelectorAll('[id]')).map(el => el.id));
+      }
+    });
+  };
+
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    handleScrollToSection(e, '#contact');
+  };
+
   return (
-    <nav className="absolute top-0 w-full z-50 font-sans bg-black ">
+    <nav className="fixed top-0 w-full z-50 font-sans bg-black">
        <div 
         className="absolute inset-0 bg-[#E5E5E5] z-10"
         style={{ clipPath: 'polygon(0 0, 48.7% 0%, 47.6% 100%, 0% 100%)' }}
       ></div>
 
       <div className="flex justify-between items-center px-6 md:px-24 py-6 relative z-20">
-        {/* Logo - Adjusted to KJ for Kalu Joseph */}
-           {/* <div className="text-black relative w-10 h-10">
-             <Image 
-              src="/assets/logo_2.png" 
-              alt="Logo" 
-              fill 
-              className="object-contain w-[10rem]"
-              priority
-          /> 
-           </div>*/}
         <Link 
-        href="/"
-        className="text-2xl font-bold tracking-tighter z-50">
-          <span className=" px-2 py-1 text-black">
+          href="/"
+          className="text-2xl font-bold tracking-tighter z-50"
+        >
+          <span className="px-2 py-1 text-black">
             Kalu Joseph
           </span>
         </Link>
@@ -45,44 +66,48 @@ export default function Navigation() {
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
-                href={link.href} 
-                className="hover:text-gray-500 transition-colors"
+                href={link.href}
+                onClick={(e) => handleScrollToSection(e, link.href)}
+                className="hover:text-gray-500 transition-colors cursor-pointer text-white"
               >
                 {link.name}
               </a>
             ))}
           </div>
-          <button className="bg-white text-black px-8 py-3 rounded-full font-black text-xs shadow-md hover:bg-black hover:text-white transition-all duration-300 border-2 border-white">
+          <button 
+            onClick={handleContactClick}
+            className="bg-white text-black px-8 py-3 rounded-full font-black text-xs shadow-md hover:bg-black hover:text-white transition-all duration-300 border-2 border-white"
+          >
             CONTACT ME
           </button>
         </div>
 
-        {/* Mobile Toggle Button */}
+        {/* Mobile Toggle Button - Now with higher z-index */}
         <button 
-          className="md:hidden z-50 p-2 text-black"
+          className="md:hidden relative z-[60] p-2 text-black"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X size={32} /> : <Menu size={32} />}
+          {isOpen ? <X size={32} className="text-black" /> : <Menu size={32} className="text-black" />}
         </button>
       </div>
 
       {/* Mobile Menu Overlay */}
       <div className={`
-        fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-500 ease-in-out md:hidden
+        fixed inset-0 bg-white z-50 flex flex-col items-center justify-center gap-8 transition-transform duration-500 ease-in-out md:hidden
         ${isOpen ? "translate-x-0" : "translate-x-full"}
       `}>
         {navLinks.map((link) => (
           <a 
             key={link.name} 
-            href={link.href} 
-            onClick={() => setIsOpen(false)}
-            className="text-3xl font-black uppercase tracking-tighter hover:text-gray-500 transition-colors"
+            href={link.href}
+            onClick={(e) => handleScrollToSection(e, link.href)}
+            className="text-3xl font-black uppercase tracking-tighter text-black hover:text-gray-500 transition-colors cursor-pointer"
           >
             {link.name}
           </a>
         ))}
         <button 
-          onClick={() => setIsOpen(false)}
+          onClick={handleContactClick}
           className="mt-4 bg-black text-white px-10 py-4 rounded-full font-black text-sm"
         >
           CONTACT ME

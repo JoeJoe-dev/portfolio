@@ -9,7 +9,7 @@ export default function Navigation() {
   const navLinks = [
     { name: "About me", href: "#about" },
     { name: "Skills", href: "#skills" },
-    { name: "Portfolio", href: "#portfolio" },
+    { name: "Projects", href: "#projects" },
   ];
 
   const handleScrollToSection = (e, href) => {

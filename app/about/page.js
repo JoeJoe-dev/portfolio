@@ -7,7 +7,7 @@ import Footer from "@/Components/Footer";
      
 export default function AboutPage() {
   const capabilities = [
-    "HTML5",
+    "HTML",
     "CSS3",
     "TAILWIND CSS",
     "BOOTSTRAP",
@@ -23,6 +23,14 @@ export default function AboutPage() {
   ];
 
   const experiences = [
+    {
+      title: "Website Developer",
+      company: "Odyssey Educational Foundation",
+      period: "August 2025",
+      description:
+        "I Build and update responsive pages with a focus on usability, performance, and clarity. I also collaborate with internal teams to translate requirements into functional web features. Improve existing UI components and ensure cross-device compatibility.",
+    },
+
     {
       title: "Front-End Developer Intern",
       company: "Larmda",
@@ -70,14 +78,16 @@ export default function AboutPage() {
 
             {/* Buttons */}
             <div className="flex items-center gap-4 pt-4">
-              <button
-                className="bg-black text-white px-8 py-3 rounded-full font-bold text-sm 
-              uppercase tracking-wide hover:bg-transparent hover:outline-solid hover:outline-black 
-              hover:text-black transition-colors flex items-center gap-2"
+              <a
+              href="/Joseph-Kalu-CV.pdf"
+              download="Joseph-Kalu-CV.pdf"
+              className="bg-black text-white px-8 py-3 rounded-full font-bold text-sm 
+                  uppercase tracking-wide hover:bg-transparent hover:outline-solid hover:outline-black 
+                  hover:text-black transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <Download size={18} />
                 Download CV
-              </button>
+              </a>
 
               <a
                 href="https://linkedin.com"
@@ -169,10 +179,10 @@ export default function AboutPage() {
                         </div>
 
                         {/* Company Name */}
-                        <p className="text-sm text-gray-400">{exp.company}</p>
+                        <p className="text-sm text-gray-700 font-bold">{exp.company}</p>
 
                         {/* Description */}
-                        <p className="text-sm text-gray-400 leading-relaxed">
+                        <p className="text-sm text-gray-500 font-semibold leading-relaxed">
                           {exp.description}
                         </p>
                       </div>
@@ -181,7 +191,7 @@ export default function AboutPage() {
                     {/* Personal Projects */}
                     <div className="space-y-3 pt-8">
                       <div className="flex justify-between items-start">
-                        <h3 className="text-xl md:text-2xl font-bold">
+                        <h3 className="text-xl md:text-3xl font-bold">
                           Personal Projects
                         </h3>
                         <span className="text-xs text-gray-500 whitespace-nowrap ml-4">
@@ -189,23 +199,61 @@ export default function AboutPage() {
                         </span>
                       </div>
 
-                      <p className="text-sm text-gray-400 font-semibold">
-                        Book Upload Website
-                      </p>
+                      <div className="mb-10">
+                        <p className="text-sm text-gray-700 font-bold">
+                        Mrs. Awosika Portfolio Website
+                        </p>
 
-                      <p className="text-sm text-gray-400 leading-relaxed">
-                        Built a platform allowing authors to upload and display
-                        books easily using React, HTML, CSS, and JavaScript.
-                        Designed intuitive UI with implemented forms, file
-                        upload, and dynamic display. Overcame challenges in form
-                        validation and data handling efficiently.
-                      </p>
+                        <p className="text-sm text-gray-500 leading-relaxed font-semibold">
+                          I conducted a research and discovered the absence of a dedicated portfolio website for Mrs. Ibukun Awosika.
+                          So, I designed and developed a complete portfolio for her using Next.js and Tailwind CSS.
+                          Focused on clean layout, modern UI, and clear presentation of academic information.
+                        </p>
+                      </div>
+
+                      <div className="mb-10">
+                        <p className="text-sm text-gray-700 font-bold">
+                          Paragon NGO Website
+                        </p>
+
+                        <p className="text-sm text-gray-500 leading-relaxed font-semibold">
+                          Developed a website for an NGO supporting sports and athletic activities. 
+                          The website was built using HTML, CSS, Tailwind CSS, and JavaScript and
+                          the content structured to clearly communicate the NGO&apos;s mission and programs.
+                        </p>
+                      </div>
+
+                      <div className="mb-10">
+                        <p className="text-sm text-gray-700 font-bold">
+                          Boliserv Website
+                        </p>
+
+                        <p className="text-sm text-gray-500 leading-relaxed font-semibold">
+                          I collaborated in the development of a corporate website for Boliserv construction company using
+                          HTML, Bootstrap, and JavaScript to create responsive layouts.
+                          Emphasis being on clarity, professionalism, and easy navigation.
+                        </p>
+                      </div>
+
+                      <div>
+                        <p className="text-sm text-gray-700 font-bold">
+                        Book Upload Website
+                        </p>
+
+                        <p className="text-sm text-gray-500 leading-relaxed font-semibold">
+                          Built a platform allowing authors to upload and display
+                          books easily using React, HTML, CSS, and JavaScript.
+                          Designed intuitive UI with implemented forms, file
+                          upload, and dynamic display. Overcame challenges in form
+                          validation and data handling efficiently.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="w-full h-[1px] bg-gray-800 mb-32 mt-32"></div>
+              <div className="w-full h-[1px] bg-gray-800 mb-10 mt-32"></div>
 
             </div>
           </div>

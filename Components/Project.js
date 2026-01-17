@@ -68,7 +68,7 @@ export default function PortfolioSection() {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <section className="bg-[#1a1a1a] text-white font-sans" id='projects'>
+    <section className="bg-[#1a1a1a] text-white font-sans" id='#'>
       {/* Hero Section with Background Image */}
       <div 
         className="relative h-64 flex items-center justify-center bg-cover bg-center"

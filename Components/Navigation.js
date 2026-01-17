@@ -7,9 +7,9 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: "About me", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
+    { name: "About me", href: "/about#about" },
+    { name: "Skills", href: "/#skills" },
+    { name: "Projects", href: "/project" },
   ];
 
   const handleScrollToSection = (e, href) => {
@@ -39,7 +39,7 @@ export default function Navigation() {
   };
 
   const handleContactClick = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     handleScrollToSection(e, '#contact');
   };
 
@@ -64,14 +64,14 @@ export default function Navigation() {
         <div className="hidden md:flex items-center gap-12">
           <div className="flex gap-10 font-bold text-sm uppercase tracking-widest">
             {navLinks.map((link) => (
-              <a 
+              <Link 
                 key={link.name} 
                 href={link.href}
-                onClick={(e) => handleScrollToSection(e, link.href)}
+                // onClick={(e) => handleScrollToSection(e, link.href)}
                 className="hover:text-gray-500 transition-colors cursor-pointer text-white"
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
           <button 

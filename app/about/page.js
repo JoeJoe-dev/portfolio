@@ -1,10 +1,45 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Download, Linkedin, Github } from "lucide-react";
 import ContactSection from "@/Components/ContactSection";
 import Footer from "@/Components/Footer";
-     
+
+// Simple Reusable Animated Section Component
+const AnimatedSection = ({ children, delay = "0s" }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const domRef = useRef(null);
+
+  useEffect(() => {
+    const currentRef = domRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setIsVisible(true);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (currentRef) observer.observe(currentRef);
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={domRef}
+      style={{ transitionDelay: delay }}
+      className={`transition-all duration-1000 ease-out ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+      }`}
+    >
+      {children}
+    </div>
+  );
+};
+
 export default function AboutPage() {
   const capabilities = [
     "HTML",
@@ -26,240 +61,171 @@ export default function AboutPage() {
     {
       title: "Website Developer",
       company: "Odyssey Educational Foundation",
-      period: "August 2025",
+      period: "Aug 2025 — Present",
       description:
-        "I Build and update responsive pages with a focus on usability, performance, and clarity. I also collaborate with internal teams to translate requirements into functional web features. Improve existing UI components and ensure cross-device compatibility.",
+        "Build and update responsive pages with a focus on usability, performance, and clarity. Collaborate with internal teams to translate requirements into functional web features.",
     },
-
     {
       title: "Front-End Developer Intern",
       company: "Larmda",
-      period: "Nov 2022",
+      period: "Nov 2022 — Feb 2023",
       description:
-        "Developed user-friendly web interfaces using React, HTML, CSS, and JavaScript. Collaborated with designers to ensure responsive design across devices. Enhanced UI components, improving usability and maintaining code organization.",
+        "Developed user-friendly web interfaces using React, HTML, CSS, and JavaScript. Collaborated with designers to ensure responsive design across devices.",
     },
   ];
 
   return (
     <div
-      className="min-h-screen bg-[#D5D5D5] text-black font-sans pt-20 md:mt-[5rem]"
+      className="min-h-screen bg-[#D5D5D5] text-black font-sans pt-24 md:pt-32 overflow-x-hidden"
       id="about"
     >
-      <div className="max-w-8xl mx-18 md:mt-[5rem]">
-        <div className="grid md:grid-cols-2 gap-16 items-start">
-          {/* Left Side - Text Content */}
-          <div className="space-y-8">
-            {/* Title */}
-            <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tight">
-              About Me
-            </h1>
-          </div>
+      <div className="max-w-10xl mx-auto md:px-12 lg:px-16">
+        <div className="px-6">
+          {/* Intro Section */}
+          <AnimatedSection>
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+              <div>
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none">
+                  About <br className="hidden md:block" /> Me
+                </h1>
+              </div>
 
-          {/* Right Side - Image */}
-          <div>
-            {/* Main Heading */}
-            <h2 className="text-2xl md:text-[1.3rem] font-light leading-relaxed">
-              I am a Frontend Developer and Website Designer based in Nigeria.
-              <br />
-              Has a Microbiology Background
-            </h2>
+              <div className="space-y-6">
+                <h2 className="text-xl md:text-2xl font-light leading-relaxed">
+                  I am a <span className="font-bold">Frontend Developer</span>{" "}
+                  and Website Designer based in Nigeria, with a background in
+                  Microbiology.
+                </h2>
+                <p className="text-sm md:text-base text-gray-700 font-medium leading-relaxed max-w-xl">
+                  I deliver modular, industry-standard code for engineering
+                  teams and high-trust, intuitive designs for business owners.
+                </p>
 
-            {/* Description */}
-            <p className="text-sm md:text-base text-gray-600 font-bold leading-relaxed max-w-xl md:pt-4">
-              I deliver modular, industry-standard code for engineering teams
-              and high-trust, intuitive designs for business owners. Leveraging
-              React.js, Next.js, and Tailwind CSS, and AI-optimized workflows, I
-              build solutions that balance technical performance with total
-              narrative control. Whether architecting a scalable codebase for a
-              corporate hire or a captivating brand for a client, I ensure every
-              project is simple, professional, and built for the current digital
-              landscape.
-            </p>
-
-            {/* Buttons */}
-            <div className="flex items-center gap-4 pt-4">
-              <a
-              href="/Joseph-Kalu-CV.pdf"
-              download="Joseph-Kalu-CV.pdf"
-              className="bg-black text-white px-8 py-3 rounded-full font-bold text-sm 
-                  uppercase tracking-wide hover:bg-transparent hover:outline-solid hover:outline-black 
-                  hover:text-black transition-colors flex items-center gap-2 cursor-pointer"
-              >
-                <Download size={18} />
-                Download CV
-              </a>
-
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 border-2 border-black rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-all"
-              >
-                <Linkedin size={20} />
-              </a>
-
-              <a
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 border-2 border-black rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-all"
-              >
-                <Github size={20} />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="">
-          <div className="">
-            <div className="">
-              <div className="w-full h-[1px] bg-gray-800 mb-32 mt-32"></div>
-
-              {/* My Capabilities Section */}
-              <div className="mb-32">
-                <div className="grid md:grid-cols-2 gap-16">
-                  {/* Left - Title */}
-                  <div>
-                    <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tight">
-                      My Capabilities
-                    </h2>
-                  </div>
-
-                  {/* Right - Description and Skills */}
-                  <div className="space-y-8">
-                    <p className="text-sm md:text-base text-gray-700 font-bold leading-relaxed">
-                      I am always looking to add more skills. Motivated
-                      front-end developer with hands-on experience from
-                      internships and personal projects. Skilled in creating
-                      responsive and intuitive web interfaces using modern
-                      technologies.
-                    </p>
-
-                    {/* Skills Pills */}
-                    <div className="flex flex-wrap gap-3">
-                      {capabilities.map((skill, index) => (
-                        <span
-                          key={index}
-                          className="px-6 py-2 border border-2 font-bold border-black rounded-full text-xs font-bold bg-black text-white
-                          uppercase tracking-wider hover:bg-transparent hover:text-black transition-all cursor-default"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
+                <div className="flex flex-wrap items-center gap-4 pt-4">
+                  <a
+                    href="/Joseph-Kalu-CV.pdf"
+                    download
+                    className="bg-black text-white px-6 md:px-8 py-3 rounded-full font-bold text-xs md:text-sm uppercase tracking-wide hover:bg-white hover:text-black border-2 border-black transition-all flex items-center gap-2"
+                  >
+                    <Download size={18} /> Download CV
+                  </a>
+                  <div className="flex gap-4">
+                    <a
+                      href="#"
+                      className="w-11 h-11 border-2 border-black rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-all"
+                    >
+                      <Linkedin size={20} />
+                    </a>
+                    <a
+                      href="#"
+                      className="w-11 h-11 border-2 border-black rounded-full flex items-center justify-center hover:bg-black hover:text-white transition-all"
+                    >
+                      <Github size={20} />
+                    </a>
                   </div>
                 </div>
               </div>
+            </div>
+          </AnimatedSection>
 
-              {/* Divider Line */}
-              <div className="w-full h-[1px] bg-gray-800 mb-32"></div>
+          <div className="w-full h-[1px] bg-gray-400 my-20 md:my-32"></div>
 
-              {/* My Experience Section */}
-              <div>
-                <div className="grid md:grid-cols-2 gap-16">
-                  {/* Left - Title */}
-                  <div>
-                    <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tight">
-                      My Experience
-                    </h2>
-                  </div>
+          {/* Capabilities Section */}
+          <AnimatedSection>
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 mb-20 md:mb-32">
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight">
+                My Capabilities
+              </h2>
+              <div className="space-y-8">
+                <p className="text-sm md:text-base text-gray-700 font-bold leading-relaxed">
+                  I am always looking to add more skills and stay updated with
+                  modern technologies.
+                </p>
+                <div className="flex flex-wrap gap-2 md:gap-3">
+                  {capabilities.map((skill, index) => (
+                    <span
+                      key={index}
+                      style={{ transitionDelay: `${index * 50}ms` }}
+                      className="px-4 md:px-6 py-2 border-2 border-black rounded-full text-[10px] md:text-xs font-bold bg-black text-white uppercase tracking-wider hover:bg-transparent hover:text-black transition-all cursor-default"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
 
-                  {/* Right - Experience List */}
-                  <div className="space-y-12">
-                    {experiences.map((exp, index) => (
-                      <div key={index} className="space-y-3">
-                        {/* Job Title and Period */}
-                        <div className="flex justify-between items-start">
-                          <h3 className="text-xl md:text-2xl font-bold">
-                            {exp.title}
-                          </h3>
-                          <span className="text-xs text-gray-500 whitespace-nowrap ml-4">
-                            {exp.period}
-                          </span>
-                        </div>
+          <div className="w-full h-[1px] bg-gray-400 mb-20 md:my-32"></div>
 
-                        {/* Company Name */}
-                        <p className="text-sm text-gray-700 font-bold">{exp.company}</p>
+          {/* Experience Section */}
+          <AnimatedSection>
+            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight">
+                My Experience
+              </h2>
 
-                        {/* Description */}
-                        <p className="text-sm text-gray-500 font-semibold leading-relaxed">
-                          {exp.description}
+              <div className="space-y-16">
+                <div className="space-y-10">
+                  {experiences.map((exp, index) => (
+                    <div
+                      key={index}
+                      className="group border-l-4 border-transparent hover:border-black pl-4 transition-all"
+                    >
+                      <div className="flex justify-between items-baseline mb-2">
+                        <h3 className="text-xl md:text-2xl font-bold uppercase">
+                          {exp.title}
+                        </h3>
+                        <span className="text-[10px] md:text-xs font-bold text-gray-500 uppercase tracking-widest">
+                          {exp.period}
+                        </span>
+                      </div>
+                      <p className="text-sm text-black font-black mb-4 uppercase tracking-wider">
+                        {exp.company}
+                      </p>
+                      <p className="text-sm md:text-base text-gray-600 font-semibold leading-relaxed">
+                        {exp.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* <div className="pt-10 border-t border-gray-400 space-y-10">
+                  <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter">
+                    Selected Projects
+                  </h3>
+                  <div className="grid gap-8">
+                    {[
+                      {
+                        name: "Mrs. Awosika Portfolio",
+                        desc: "Full portfolio using Next.js and Tailwind CSS.",
+                      },
+                      {
+                        name: "Paragon NGO Website",
+                        desc: "NGO platform supporting sports using modern web tools.",
+                      },
+                    ].map((proj, idx) => (
+                      <div key={idx} className="group cursor-default">
+                        <p className="text-lg font-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform">
+                          {proj.name}
+                        </p>
+                        <p className="text-sm md:text-base text-gray-600 font-semibold leading-relaxed">
+                          {proj.desc}
                         </p>
                       </div>
                     ))}
-
-                    {/* Personal Projects */}
-                    <div className="space-y-3 pt-8">
-                      <div className="flex justify-between items-start">
-                        <h3 className="text-xl md:text-3xl font-bold">
-                          Personal Projects
-                        </h3>
-                        <span className="text-xs text-gray-500 whitespace-nowrap ml-4">
-                          2023 — Present
-                        </span>
-                      </div>
-
-                      <div className="mb-10">
-                        <p className="text-sm text-gray-700 font-bold">
-                        Mrs. Awosika Portfolio Website
-                        </p>
-
-                        <p className="text-sm text-gray-500 leading-relaxed font-semibold">
-                          I conducted a research and discovered the absence of a dedicated portfolio website for Mrs. Ibukun Awosika.
-                          So, I designed and developed a complete portfolio for her using Next.js and Tailwind CSS.
-                          Focused on clean layout, modern UI, and clear presentation of academic information.
-                        </p>
-                      </div>
-
-                      <div className="mb-10">
-                        <p className="text-sm text-gray-700 font-bold">
-                          Paragon NGO Website
-                        </p>
-
-                        <p className="text-sm text-gray-500 leading-relaxed font-semibold">
-                          Developed a website for an NGO supporting sports and athletic activities. 
-                          The website was built using HTML, CSS, Tailwind CSS, and JavaScript and
-                          the content structured to clearly communicate the NGO&apos;s mission and programs.
-                        </p>
-                      </div>
-
-                      <div className="mb-10">
-                        <p className="text-sm text-gray-700 font-bold">
-                          Boliserv Website
-                        </p>
-
-                        <p className="text-sm text-gray-500 leading-relaxed font-semibold">
-                          I collaborated in the development of a corporate website for Boliserv construction company using
-                          HTML, Bootstrap, and JavaScript to create responsive layouts.
-                          Emphasis being on clarity, professionalism, and easy navigation.
-                        </p>
-                      </div>
-
-                      <div>
-                        <p className="text-sm text-gray-700 font-bold">
-                        Book Upload Website
-                        </p>
-
-                        <p className="text-sm text-gray-500 leading-relaxed font-semibold">
-                          Built a platform allowing authors to upload and display
-                          books easily using React, HTML, CSS, and JavaScript.
-                          Designed intuitive UI with implemented forms, file
-                          upload, and dynamic display. Overcame challenges in form
-                          validation and data handling efficiently.
-                        </p>
-                      </div>
-                    </div>
                   </div>
-                </div>
+                </div> */}
               </div>
-
-              <div className="w-full h-[1px] bg-gray-800 mb-10 mt-32"></div>
-
             </div>
-          </div>
+          </AnimatedSection>
         </div>
 
-        <ContactSection />
+        <div className="w-full h-[1px] bg-gray-400 mt-20 md:mt-32"></div>
+
+        <AnimatedSection delay="0.2s">
+          <ContactSection />
+        </AnimatedSection>
       </div>
 
       <Footer />

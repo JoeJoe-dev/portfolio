@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Menu, X, Mail, Github, Linkedin } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Navigation() {
@@ -18,12 +18,11 @@ export default function Navigation() {
     
     const targetId = href.replace('#', '');
     
-    // Use requestAnimationFrame to ensure DOM is ready
     requestAnimationFrame(() => {
       const targetElement = document.getElementById(targetId);
       
       if (targetElement) {
-        const navbarHeight = 100; // Adjust based on your navbar height
+        const navbarHeight = 100;
         const elementPosition = targetElement.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.scrollY - navbarHeight;
 
@@ -31,31 +30,39 @@ export default function Navigation() {
           top: offsetPosition,
           behavior: 'smooth'
         });
-      } else {
-        console.error(`Element with id "${targetId}" not found`);
-        console.log('Available IDs:', Array.from(document.querySelectorAll('[id]')).map(el => el.id));
       }
     });
   };
 
   const handleContactClick = (e) => {
-    // e.preventDefault();
-    handleScrollToSection(e, '#contact');
+    e.preventDefault();
+    setIsOpen(false);
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      const navbarHeight = 100;
+      const elementPosition = contactSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
     <nav className="fixed top-0 w-full z-50 font-sans bg-black">
-       <div 
-        className="absolute inset-0 bg-[#E5E5E5] z-10"
+      <div 
+        className="hidden md:block absolute inset-0 bg-[#E5E5E5] z-10"
         style={{ clipPath: 'polygon(0 0, 48.7% 0%, 47.6% 100%, 0% 100%)' }}
       ></div>
 
-      <div className="flex justify-between items-center px-6 md:px-24 py-6 relative z-20">
+      <div className="flex justify-between items-center px-6 md:px-24 py-4 md:py-6 relative z-20">
         <Link 
           href="/"
-          className="text-2xl font-bold tracking-tighter z-50"
+          className="text-xl md:text-2xl font-bold tracking-tighter z-50"
         >
-          <span className="px-2 py-1 text-black">
+          <span className="px-2 py-1 text-white md:text-black">
             Kalu Joseph
           </span>
         </Link>
@@ -67,7 +74,6 @@ export default function Navigation() {
               <Link 
                 key={link.name} 
                 href={link.href}
-                // onClick={(e) => handleScrollToSection(e, link.href)}
                 className="hover:text-gray-500 transition-colors cursor-pointer text-white"
               >
                 {link.name}
@@ -82,36 +88,91 @@ export default function Navigation() {
           </button>
         </div>
 
-        {/* Mobile Toggle Button - Now with higher z-index */}
+        {/* Mobile Toggle Button */}
         <button 
-          className="md:hidden relative z-[60] p-2 text-black"
+          className="md:hidden relative z-[60] p-2"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <X size={32} className="text-black" /> : <Menu size={32} className="text-black" />}
+          {isOpen ? <X size={28} className="text-white" /> : <Menu size={28} className="text-white" />}
         </button>
       </div>
 
       {/* Mobile Menu Overlay */}
       <div className={`
-        fixed inset-0 bg-white z-50 flex flex-col items-center justify-center gap-8 transition-transform duration-500 ease-in-out md:hidden
+        fixed inset-0 bg-[#1a1a1a] z-50 flex flex-col items-center justify-between py-20 transition-transform duration-500 ease-in-out md:hidden
         ${isOpen ? "translate-x-0" : "translate-x-full"}
       `}>
-        {navLinks.map((link) => (
-          <a 
-            key={link.name} 
-            href={link.href}
-            onClick={(e) => handleScrollToSection(e, link.href)}
-            className="text-3xl font-black uppercase tracking-tighter text-black hover:text-gray-500 transition-colors cursor-pointer"
+        {/* Menu Links */}
+        <div className="flex flex-col items-center gap-8 mt-12">
+          <Link
+          href="/"
+          onClick={() => setIsOpen(false)}
+          className="text-lg font-medium text-white hover:text-gray-400 transition-colors cursor-pointer uppercase tracking-wide"
           >
-            {link.name}
-          </a>
-        ))}
-        <button 
-          onClick={handleContactClick}
-          className="mt-4 bg-black text-white px-10 py-4 rounded-full font-black text-sm"
-        >
-          CONTACT ME
-        </button>
+            Home
+          </Link>
+          {navLinks.map((link) => (
+            <Link 
+              key={link.name} 
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className="text-lg font-medium text-white hover:text-gray-400 transition-colors cursor-pointer uppercase tracking-wide"
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
+
+        {/* Hero Content for Mobile */}
+        <div className="flex flex-col items-center text-center px-6">
+          {/* Profile Image */}
+          <div className="mb-6">
+            <img 
+              src="/assets/Images/Heroheader_img(2).png"
+              alt="Kalu Joseph"
+              className="w-48 h-48 rounded-full object-cover border-4 border-gray-700"
+            />
+          </div>
+
+          {/* Social Icons */}
+          <div className="flex gap-4 mb-6">
+            <a 
+              href="mailto:Chibyke910@gmail.com"
+              className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-600 transition-all"
+            >
+              <Mail size={20} className="text-white" />
+            </a>
+            <a 
+              href="https://github.com/JoeJoe-dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-600 transition-all"
+            >
+              <Github size={20} className="text-white" />
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/joseph-kalu-934506237"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:bg-gray-600 transition-all"
+            >
+              <Linkedin size={20} className="text-white" />
+            </a>
+          </div>
+
+          {/* Text */}
+          <p className="text-sm text-gray-400 mb-2">Hi, I am</p>
+          <h1 className="text-3xl font-bold text-white mb-2">Kalu Joseph</h1>
+          <p className="text-sm text-gray-400 mb-8">Front-end Developer / Website Designer</p>
+
+          {/* Contact Button */}
+          <button 
+            onClick={handleContactClick}
+            className="bg-white text-black px-8 py-3 rounded-full font-bold text-sm uppercase tracking-wide hover:bg-gray-200 transition-all w-full max-w-xs"
+          >
+            CONTACT ME
+          </button>
+        </div>
       </div>
     </nav>
   );

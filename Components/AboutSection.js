@@ -10,351 +10,128 @@ export default function AboutSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
+        // This triggers when the user scrolls the section into view
         setIsVisible(entry.isIntersecting);
       },
-      {
-        threshold: 0.2, // Trigger when 20% of the section is visible
-        rootMargin: "0px 0px -50px 0px"
+      { 
+        threshold: 0.1, // Trigger when 10% of the section is visible
+        rootMargin: "0px 0px -100px 0px" // Slight offset so it feels more natural
       }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section 
-      ref={sectionRef}
-      className="bg-[#D5D5D5] py-20 px-8 font-sans" 
-      id="about"
-    >
+    <section ref={sectionRef} className="bg-[#D5D5D5] py-20 px-8 font-sans overflow-hidden" id="about">
       <style>{`
         @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(50px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-        
         @keyframes fadeOutDown {
-          from {
-            opacity: 1;
-            transform: translateY(0);
-          }
-          to {
-            opacity: 0;
-            transform: translateY(30px);
-          }
+          from { opacity: 1; transform: translateY(0); }
+          to { opacity: 0; transform: translateY(50px); }
         }
         
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-        
-        @keyframes fadeOut {
-          from {
-            opacity: 1;
-          }
-          to {
-            opacity: 0;
-          }
-        }
-        
-        @keyframes scaleIn {
-          from {
-            opacity: 0;
-            transform: scale(0.9);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-        
-        @keyframes scaleOut {
-          from {
-            opacity: 1;
-            transform: scale(1);
-          }
-          to {
-            opacity: 0;
-            transform: scale(0.9);
-          }
-        }
-        
-        @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        @keyframes slideOutLeft {
-          from {
-            opacity: 1;
-            transform: translateX(0);
-          }
-          to {
-            opacity: 0;
-            transform: translateX(-50px);
-          }
-        }
-        
-        @keyframes slideInRight {
-          from {
-            opacity: 0;
-            transform: translateX(50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        @keyframes slideOutRight {
-          from {
-            opacity: 1;
-            transform: translateX(0);
-          }
-          to {
-            opacity: 0;
-            transform: translateX(50px);
-          }
-        }
-        
-        .animate-fade-in-up {
-          animation: fadeInUp 0.8s ease-out forwards;
+        /* The logic: only run animation if isVisible is true */
+        .scroll-trigger { 
           opacity: 0;
+          animation: ${isVisible ? 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards' : 'fadeOutDown 0.6s ease-in forwards'};
         }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
         
-        .animate-fade-out-down {
-          animation: fadeOutDown 0.8s ease-out forwards;
-        }
-        
-        .animate-fade-in {
-          animation: fadeIn 0.6s ease-out forwards;
-          opacity: 0;
-        }
-        
-        .animate-fade-out {
-          animation: fadeOut 0.6s ease-out forwards;
-        }
-        
-        .animate-scale-in {
-          animation: scaleIn 0.6s ease-out forwards;
-          opacity: 0;
-        }
-        
-        .animate-scale-out {
-          animation: scaleOut 0.6s ease-out forwards;
-        }
-        
-        .animate-slide-left {
-          animation: slideInLeft 0.8s ease-out forwards;
-          opacity: 0;
-        }
-        
-        .animate-slide-out-left {
-          animation: slideOutLeft 0.8s ease-out forwards;
-        }
-        
-        .animate-slide-right {
-          animation: slideInRight 0.8s ease-out forwards;
-          opacity: 0;
-        }
-        
-        .animate-slide-out-right {
-          animation: slideOutRight 0.8s ease-out forwards;
-        }
-        
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
-        .stagger-5 { animation-delay: 0.9s; }
-        .stagger-6 { animation-delay: 1s; }
-        .stagger-7 { animation-delay: 1.1s; }
-        .stagger-8 { animation-delay: 1.2s; }
-        
-        .hidden-initially {
-          opacity: 0;
-        }
+        /* Specific delays for the grid to wait for the text above */
+        .grid-delay-1 { animation-delay: 0.6s; }
+        .grid-delay-2 { animation-delay: 0.8s; }
+        .grid-delay-3 { animation-delay: 1.0s; }
+        .divider-delay { animation-delay: 1.2s; }
       `}</style>
-      
-      <div className="max-w-4xl mx-auto">
+
+      <div className="max-w-7xl mx-auto">
         {/* Title */}
-        <div className={`flex justify-center mb-8 ${
-          isVisible ? 'animate-scale-in stagger-1' : 'animate-scale-out stagger-1'
-        }`}>
-          <div className="border-4 border-black px-16 py-4">
-            <h2 className="text-2xl font-bold tracking-[0.3em] text-black">
-              ABOUT ME
-            </h2>
+        <div className="flex justify-center mb-12 scroll-trigger delay-1">
+          <div className="border-4 border-black px-12 py-4">
+            <h2 className="text-2xl font-bold tracking-[0.3em] text-black uppercase">About Me</h2>
           </div>
         </div>
 
         {/* Description */}
-        <p className={`text-center text-sm text-black leading-relaxed mb-8 max-w-2xl mx-auto 
-          ${isVisible ? 'animate-fade-in-up stagger-2' : 'animate-fade-out-down stagger-2'}`}>
-          I&apos;m Kalu Joseph, a creative Frontend Developer and Website
-          Designer based in Nigeria. I&apos;m a fast-learning, eager programmer
-          who believes that excellence only counts if it brings true
-          satisfaction to the person using it. Whether I&apos;m building a sleek
-          personal brand site or a complex platform for an organization, my goal
-          is always the same: to create something captivating and intuitive that
-          gives the user the best of experience and total control over your
-          story.
+        <p className="text-center text-base text-black leading-relaxed mb-8 max-w-2xl mx-auto scroll-trigger delay-2">
+          I&apos;m Kalu Joseph, a creative Frontend Developer and Website Designer based in Nigeria. 
+          I build high-performance digital homes that balance technical excellence for recruiters with 
+          total narrative control for business owners.
         </p>
 
         {/* Explore Button */}
-        <div className={`flex justify-center mb-12 ${
-          isVisible ? 'animate-fade-in stagger-3' : 'animate-fade-out stagger-3'
-        }`}>
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-[2px] bg-black"></div>
-            <Link href="/about" className="cursor-pointer">
-              <button className="text-black cursor-pointer text-sm font-bold tracking-widest hover:opacity-70 transition-opacity">
-                READ MORE
-              </button>
-            </Link>
-            <div className="w-12 h-[2px] bg-black"></div>
-          </div>
+        <div className="flex justify-center items-center gap-6 mb-20 scroll-trigger delay-3">
+          <div className="w-12 h-[2px] bg-black"></div>
+          <Link href="/about">
+            <button className="text-black text-sm font-extrabold tracking-widest hover:opacity-60 transition-all uppercase cursor-pointer">
+              Read More
+            </button>
+          </Link>
+          <div className="w-12 h-[2px] bg-black"></div>
         </div>
 
-        {/* Decorative Divider */}
-        <div className={`flex justify-center items-center mb-16 ${
-          isVisible ? 'animate-fade-in stagger-4' : 'animate-fade-out stagger-4'
-        }`}>
-          <div className="w-16 h-[2px] bg-black"></div>
-          <div className="mx-3">
-            <svg
-              width="30"
-              height="20"
-              viewBox="0 0 30 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M0 10 L10 0 L20 10 L10 20 Z" fill="black" />
-              <path d="M10 10 L20 0 L30 10 L20 20 Z" fill="black" />
-            </svg>
-          </div>
-          <div className="w-16 h-[2px] bg-black"></div>
-        </div>
-
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
-          {/* Design */}
-          <div className={`text-center ${
-            isVisible ? 'animate-slide-left stagger-5' : 'animate-slide-out-left stagger-5'
-          }`}>
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 rounded-full border-2 border-black flex items-center justify-center bg-transparent">
-                <Palette size={28} className="text-black" strokeWidth={1.5} />
-              </div>
-            </div>
-            <h3 className="text-xl font-bold text-black mb-4 tracking-wide">
-              WEB DESIGN
-            </h3>
-            <p className="text-sm text-black text-justify leading-relaxed">
-              Recently, the primary friction for both recruiters and clients is
-              the &quot;Visual Disconnect&quot;, recruiters struggle to find
-              designers who understand how to build for actual code
-              implementation, while clients are tired of beautiful websites that
-              are impossible for non-tech users to manage. I solve this by
-              delivering high-performance, AI-optimized web designs that
-              prioritize both systematic consistency for professional dev teams
-              and total narrative control for business owners. I bridge the gap
-              between high-end aesthetics and practical usability.
+        {/* Services Grid - Only slides up when section isVisible */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-20 w-full px-4">
+          <div className="text-center scroll-trigger grid-delay-1">
+            <ServiceIcon Icon={Palette} />
+            <h3 className="text-xl font-bold text-black mb-4 tracking-wide uppercase">Web Design</h3>
+            <p className="text-sm text-black leading-relaxed lg:text-justify">
+              I deliver high-performance designs that prioritize systematic consistency for teams 
+              and total narrative control for business owners.
             </p>
           </div>
 
-          {/* Development */}
-          <div className={`text-center ${
-            isVisible ? 'animate-slide-right stagger-6' : 'animate-slide-out-right stagger-6'
-          }`}>
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 rounded-full border-2 border-black flex items-center justify-center bg-transparent">
-                <Code size={28} className="text-black" strokeWidth={1.5} />
-              </div>
-            </div>
-            <h3 className="text-xl font-bold text-black mb-4 tracking-wide">
-              WEB DEVELOPMENT
-            </h3>
-            <p className="text-sm text-black text-justify leading-relaxed">
-              I eliminate the frustration of &apos;Rigid Codebases&apos; by
-              delivering high-performance, AI-accelerated solutions built for
-              both scale and simplicity. For recruiters, I prioritize modular,
-              industry-standard code that fits seamlessly into professional
-              engineering workflows. For clients, I ensure your platform is easy
-              to manage and strictly built to convert—creating a high-trust
-              experience that turns your visitors into loyal partners.
+          <div className="text-center scroll-trigger grid-delay-2">
+            <ServiceIcon Icon={Code} />
+            <h3 className="text-xl font-bold text-black mb-4 tracking-wide uppercase">Web Development</h3>
+            <p className="text-sm text-black leading-relaxed lg:text-justify">
+              I write modular, industry-standard code in React and Next.js, ensuring your platform 
+              is easy to scale and built to convert.
+            </p>
+          </div>
+
+          <div className="text-center scroll-trigger grid-delay-3 md:col-span-2 lg:col-span-1">
+            <ServiceIcon Icon={Wrench} />
+            <h3 className="text-xl font-bold text-black mb-4 tracking-wide uppercase">Web Maintenance</h3>
+            <p className="text-sm text-black leading-relaxed max-w-md mx-auto lg:max-w-none lg:text-justify">
+              I handle technical health and performance optimization, ensuring your professional 
+              digital environment remains secure and fast.
             </p>
           </div>
         </div>
 
-        {/* Maintenance - Centered */}
-        <div className={`text-center max-w-md mx-auto mb-16 ${
-          isVisible ? 'animate-fade-in-up stagger-7' : 'animate-fade-out-down stagger-7'
-        }`}>
-          <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 rounded-full border-2 border-black flex items-center justify-center bg-transparent">
-              <Wrench size={28} className="text-black" strokeWidth={1.5} />
-            </div>
+        {/* Divider */}
+        <div className="flex justify-center items-center scroll-trigger divider-delay">
+          <div className="w-20 h-[2px] bg-black"></div>
+          <div className="mx-4 flex gap-1 text-black">
+            <DiamondIcon />
+            <DiamondIcon />
           </div>
-          <h3 className="text-xl font-bold text-black mb-4 tracking-wide">
-            WEB MAINTENANCE
-          </h3>
-          <p className="text-sm text-black leading-relaxed">
-            The biggest risk for any website is &apos;Maintenance Abandonment&apos;, where
-            recruiters see a portfolio of broken links and outdated code, and
-            clients are left with a slow site they&apos;re afraid to update. 
-            I solve showing a commitment to clean, long-term code health and
-            performance optimization. For clients, I handle the technical
-            updates so your visitors always experience a professional,
-            high-trust environment that keeps your mission moving forward
-          </p>
-        </div>
-
-        {/* Bottom Decorative Divider */}
-        <div className={`flex justify-center items-center ${
-          isVisible ? 'animate-fade-in stagger-8' : 'animate-fade-out stagger-8'
-        }`}>
-          <div className="w-16 h-[2px] bg-black"></div>
-          <div className="mx-3">
-            <svg
-              width="30"
-              height="20"
-              viewBox="0 0 30 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M0 10 L10 0 L20 10 L10 20 Z" fill="black" />
-              <path d="M10 10 L20 0 L30 10 L20 20 Z" fill="black" />
-            </svg>
-          </div>
-          <div className="w-16 h-[2px] bg-black"></div>
+          <div className="w-20 h-[2px] bg-black"></div>
         </div>
       </div>
     </section>
   );
 }
+
+const ServiceIcon = ({ Icon }) => (
+  <div className="flex justify-center mb-6">
+    <div className="w-16 h-16 rounded-full border-2 border-black flex items-center justify-center bg-transparent">
+      <Icon size={28} className="text-black" strokeWidth={1.5} />
+    </div>
+  </div>
+);
+
+const DiamondIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 30 20" fill="currentColor">
+    <path d="M0 10 L10 0 L20 10 L10 20 Z" />
+  </svg>
+);

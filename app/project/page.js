@@ -1,145 +1,151 @@
 "use client";
 
-import React from "react";
-import { Download, Linkedin, Github } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
 import ContactSection from "@/Components/ContactSection";
 import Footer from "@/Components/Footer";
-import { useState } from "react";
 
-// Import your project images
-const project1Img = "/assets/Images/Paragon.jpg";
-const project2Img = "/assets/Images/Awosika.jpg";
-const project3Img = "/assets/Images/Book.jpg";
-const project4Img = "/assets/Images/Bankist.jpg";
-const project5Img = "/assets/Images/KlinTech.jpg";
+// Animation Wrapper Component
+const FadeUp = ({ children, delay = "0s" }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const domRef = useRef(null);
+
+  useEffect(() => {
+    const currentRef = domRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setIsVisible(true);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (currentRef) observer.observe(currentRef);
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={domRef}
+      style={{ transitionDelay: delay }}
+      className={`transition-all duration-1000 ease-out ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+      }`}
+    >
+      {children}
+    </div>
+  );
+};
 
 export default function ProjectPage() {
-  const [activeFilter, setActiveFilter] = useState("ALL");
-
   const projects = [
     {
       id: 1,
       title: "Paragon Website",
       description: "Bootstrap, CSS3, HTML5, JS",
-      image: project1Img,
+      image: "/assets/Images/Paragon.jpg",
       demoLink: "https://paragonwebsite.netlify.app",
-      moreLink: "/projects",
     },
     {
       id: 2,
       title: "Mrs. Awosika Portfolio Website",
       description: "Next.js, Tailwind CSS",
-      image: project2Img,
+      image: "/assets/Images/Awosika.jpg",
       demoLink: "https://ibukunawosika.vercel.app",
-      moreLink: "/projects",
     },
     {
       id: 3,
       title: "Samuel Book Website",
       description: "HTML5, CSS3, JS",
-      image: project3Img,
+      image: "/assets/Images/Book.jpg",
       demoLink: "https://bookwebsite-test.netlify.app",
-      moreLink: "/project",
     },
     {
       id: 4,
-      title: 'Bankist Website',
-      description: 'HTML5, CSS3, JS',
-      image: project4Img,
-      demoLink: '#',
-      moreLink: 'projects',
+      title: "Bankist Website",
+      description: "HTML5, CSS3, JS",
+      image: "/assets/Images/Bankist.jpg",
+      demoLink: "https://bankistwebsitedemo.netlify.app",
     },
     {
       id: 5,
-      title: 'KlinTech Website',
-      description: 'HTML5, CSS3, JS',
-      image: project5Img,
-      demoLink: '#',
-      moreLink: 'projects',
+      title: "KlinTech Website",
+      description: "HTML5, CSS3, JS",
+      image: "/assets/Images/KlinTech.jpg",
+      demoLink: "https://klintech-hub-123.vercel.app",
     },
   ];
 
-  const filteredProjects =
-    activeFilter === "ALL"
-      ? projects
-      : projects.filter((project) => project.category === activeFilter);
-
   return (
     <div
-      className="min-h-screen bg-[#D5D5D5] text-black font-sans pt-[7rem] md:mt-[5rem]"
+      className="min-h-screen bg-[#D5D5D5] text-black font-sans pt-24 md:pt-32"
       id="project"
     >
-      <div className="">
-        {/* Hero Section with Background Image */}
-        <div className="md:ml-[6.2rem]">
-          <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tight tracking-[0.3em]">
-            PORTFOLIO
-          </h1>
-          <p className="text-xl pl-[.3rem] pt-3 md:text-base text-gray-700 font-bold leading-relaxed">
-            Here are my completed personal projects
-          </p>
-        </div>
+      <div className="max-w-10xl mx-auto md:px-12 lg:px-20">
+        <div className="px-6">
+          {/* Header Section */}
+          <FadeUp>
+            <div className="mb-16">
+              <h1 className="text-5xl sm:text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6">
+                PORTFOLIO
+              </h1>
+              <p className="text-lg md:text-xl text-gray-700 font-bold border-l-4 border-black pl-2 ml-1">
+                Here are my completed personal projects
+              </p>
+            </div>
+          </FadeUp>
 
-        {/* Projects Grid */}
-        <div className={`mx-[3rem] py-16 px-[6.6rem]`}>
-          <div className="grid md:grid-cols-3 gap-20 mb-[3rem]">
-            {filteredProjects.map((project) => (
-              <div
-                key={project.id}
-                className="group relative overflow-hidden bg-black rounded-sm cursor-pointer"
-              >
-                {/* Project Image */}
-                <div className="relative h-80 overflow-hidden">
+          {/* Projects Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-32">
+            {projects.map((project, index) => (
+              <FadeUp key={project.id} delay={`${index * 100}ms`}>
+                <div className="group relative overflow-hidden bg-black rounded-sm aspect-[4/5] cursor-pointer shadow-xl">
+                  {/* Project Image */}
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-[24rem] h-[38rem] transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
                   />
-                  <div className="absolute to-transparent opacity-80"></div>
-                </div>
 
-                {/* Project Info Overlay */}
-                <div
-                  className="absolute group-hover:inset-0 bg-gradient-to-t from-black via-black/70 flex flex-col 
-                    items-center justify-center text-center p-8"
-                >
-                  {/* Action Buttons */}
-                  <div
-                    className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                           absolute inset-0 flex flex-col items-center justify-center text-center p-8 text-white"
-                  >
-                    <h3 className="text-4xl font-bold mb-4">{project.title}</h3>
-                    <p className="text-sm font-bold text-gray-300 mb-6">
+                  {/* Project Info Overlay */}
+                  <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center text-center p-6 md:p-8 backdrop-blur-sm">
+                    <h3 className="text-2xl md:text-3xl font-black text-white mb-3 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      {project.title}
+                    </h3>
+                    <p className="text-xs md:text-sm font-bold text-gray-300 mb-8 uppercase tracking-widest translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
                       {project.description}
                     </p>
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-[1px] bg-white"></div>
+
+                    <div className="flex items-center gap-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-150">
+                      <div className="w-8 h-[1px] bg-white/50"></div>
                       <a
                         href={project.demoLink}
-                        className="text-xs font-bold tracking-widest hover:text-gray-500 transition-colors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white text-xs font-black tracking-[0.3em] hover:text-gray-400 transition-colors uppercase py-2 px-4 border border-white/30 hover:border-white rounded-full"
                       >
-                        DEMO
+                        VIEW DEMO
                       </a>
-                      {/* <div className="w-[1px] h-4 bg-white"></div>
-                              <a
-                                  href={project.moreLink}
-                                  className="text-xs font-bold tracking-widest hover:text-gray-500 transition-colors"
-                              >
-                                  MORE
-                              </a> */}
-                      <div className="w-12 h-[1px] bg-white"></div>
+                      <div className="w-8 h-[1px] bg-white/50"></div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </FadeUp>
             ))}
           </div>
-
-          <ContactSection />
         </div>
 
-        <Footer />
+        {/* Contact Section */}
+        <FadeUp>
+          <div className="border-t border-gray-400 pt-20">
+            <ContactSection />
+          </div>
+        </FadeUp>
       </div>
+
+      <Footer />
     </div>
   );
 }

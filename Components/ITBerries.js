@@ -5,27 +5,18 @@ export default function ITberries() {
     <section className="bg-[#1A1A1A] text-white py-16 px-8 md:px-24 relative overflow-hidden">
       <div className="max-w-4xl">
         <h1 className="text-[1rem] font-bold tracking-[0.2em] mb-6 uppercase">
-            Bridging the Gap Between AI-Enhanced Speed and Human-Centered Design.
+          Building Digital Homes You Actually Own and Control.
         </h1>
 
-        <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 max-w-10xl text-justify">
-          In this era, the primary barrier for any professional or
-          organization—whether a solo entrepreneur, a growing business, or a
-          mission-driven NGO-is no longer just "getting a website," but avoiding
-          the trap of technical dependency and unmanageable code. You deserve a
-          digital presence that serves as a high-performance asset rather than a
-          liability, yet too many visitors find themselves abandoned by "black
-          box" systems they cannot control or update without expensive
-          intervention. By choosing a Frontend Developer and Website Designer
-          who leverages AI-driven workflows, you bridge the gap between
-          sophisticated, bespoke design and effortless usability. This modern
-          approach uses AI to accelerate development and optimize performance,
-          ensuring your platform is built with the precision of a large agency
-          but remains entirely under your command. Whether you are launching a
-          personal brand, a medical portal, or a global school initiative, you
-          gain a secure, compliant, and beautiful digital home that evolves
-          alongside your goals, giving you total narrative control without the
-          fear of post-launch failure.
+        <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 max-w-10xl">
+          I build high-quality websites that give you total control and
+          eliminate the need for expensive technical help later on. For
+          organizations and businesses, I deliver clean, professional work that
+          fits perfectly into established teams. For startups and individuals, I
+          create beautiful, easy-to-manage platforms that grow with your brand.
+          My goal is to ensure your digital home is secure and reliable, so you
+          can focus on your mission without worrying about your website breaking
+          or failing after it launches.
         </p>
 
         <div className="flex items-center gap-4">

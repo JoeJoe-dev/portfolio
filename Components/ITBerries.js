@@ -3,12 +3,19 @@ import React from "react";
 export default function ITberries() {
   return (
     <section className="bg-[#1A1A1A] text-white py-16 px-8 md:px-24 relative overflow-hidden">
-      <div className="max-w-4xl">
-        <h1 className="text-[1rem] font-bold tracking-[0.2em] mb-6 uppercase">
-          Building Digital Homes You Actually Own and Control.
-        </h1>
+      <div className="max-w-4xl relative z-10">
+        <div className="mb-8">
+          {/* Smaller, Title Case, and Different Weight */}
+          <h2 className="text-sm md:text-base font-medium tracking-[0.2em] text-gray-400 capitalize mb-1">
+            Building Amazing
+          </h2> 
+          {/* Main bold heading */}
+          <h1 className="text-2xl md:text-4xl font-bold tracking-[0.1em] uppercase">
+            Websites / Web Apps
+          </h1>
+        </div>
 
-        <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 max-w-10xl">
+        <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 max-w-2xl">
           I build high-quality websites that give you total control and
           eliminate the need for expensive technical help later on. For
           organizations and businesses, I deliver clean, professional work that
@@ -21,17 +28,17 @@ export default function ITberries() {
 
         <div className="flex items-center gap-4">
           <div className="h-[1px] w-8 bg-gray-500"></div>
-          <button className="text-xs font-bold tracking-widest hover:text-gray-400 transition">
+          <button className="text-xs font-bold tracking-widest hover:text-gray-400 transition uppercase">
             Joseph Kalu
           </button>
           <div className="h-[1px] w-8 bg-gray-500"></div>
         </div>
       </div>
 
-      {/* Decorative Background Text/Icon */}
-      <div className="absolute right-0 bottom-0 opacity-10 select-none pointer-events-none">
-        <h1 className="text-[15rem] font-black leading-none transform translate-y-20 translate-x-20">
-          IT
+      {/* Decorative Background Text */}
+      <div className="absolute right-0 bottom-0 opacity-5 select-none pointer-events-none">
+        <h1 className="text-[12rem] md:text-[20rem] font-black leading-none transform translate-y-1/4 translate-x-1/4">
+          JK
         </h1>
       </div>
     </section>

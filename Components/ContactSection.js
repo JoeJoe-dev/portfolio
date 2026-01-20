@@ -9,6 +9,7 @@ export default function ContactSection() {
     phone: "",
     message: "",
   });
+  
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isVisible, setIsVisible] = useState(false);

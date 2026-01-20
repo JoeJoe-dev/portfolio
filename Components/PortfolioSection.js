@@ -28,8 +28,16 @@ const PROJECTS = [
   },
 ];
 
-const ProjectCard = ({ project }) => (
-  <div className="group relative overflow-hidden bg-[#0d0d0d] rounded-sm cursor-pointer h-80 border border-white/10">
+const ProjectCard = ({ project, index, isVisible }) => (
+  <div 
+    className={`group relative overflow-hidden bg-[#0d0d0d] rounded-sm cursor-pointer h-80 border border-white/10 transition-all duration-700 ease-in-out ${
+      isVisible 
+        ? 'opacity-100 translate-y-0 scale-100' 
+        : 'opacity-0 translate-y-20 scale-95'
+    }`}
+    // This creates the staggered "one after the other" effect
+    style={{ transitionDelay: isVisible ? `${(index + 2) * 100}ms` : '0ms' }}
+  >
     <img
       src={project.image}
       alt={project.title}
@@ -55,58 +63,73 @@ export default function PortfolioSection() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.1 }
+      ([entry]) => {
+        // This will now toggle true/false as you scroll in and out
+        setIsVisible(entry.isIntersecting);
+      },
+      { 
+        threshold: 0.1, // Triggers when 10% of the section is visible
+        rootMargin: "-50px 0px -50px 0px" // Adds a buffer so it doesn't flicker at the very edge
+      }
     );
+
     if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => sectionRef.current && observer.unobserve(sectionRef.current);
+    
+    return () => {
+      if (sectionRef.current) observer.disconnect();
+    };
   }, []);
 
   return (
     <section 
-      ref={sectionRef} 
-      className="relative min-h-screen font-sans overflow-hidden bg-fixed bg-cover bg-center"
-      style={{ 
-        backgroundImage: 'url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200")' 
-      }}
+      ref={sectionRef}
+      className="relative min-h-screen font-sans overflow-hidden bg-scroll md:bg-fixed bg-cover bg-center py-20"
+      style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200")' }}
       id="portfolio"
     >
-      {/* Global Section Overlay for readability */}
       <div className="absolute inset-0 bg-black/85 backdrop-blur-[2px]" />
-
-      <style>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(50px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-up { animation: fadeInUp 1s ease-out forwards; }
-        .hidden-pre { opacity: 0; }
-      `}</style>
 
       <div className="relative z-10">
         {/* Header Title */}
-        <div className={`flex justify-center py-20 transition-all ${isVisible ? 'animate-up' : 'hidden-pre'}`}>
+        <div className={`flex justify-center mb-16 transition-all duration-1000 transform ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+        }`}>
           <div className="border-4 border-white px-12 md:px-20 py-4 bg-black/40">
             <h2 className="text-2xl md:text-3xl font-bold tracking-[0.3em] text-white text-center">PORTFOLIO</h2>
           </div>
         </div>
 
-        {/* Filter/Label */}
-        <div className={`flex justify-center pb-12 transition-all delay-200 ${isVisible ? 'animate-up' : 'hidden-pre'}`}>
+        {/* Filter Label */}
+        <div 
+          className={`flex justify-center pb-12 transition-all duration-1000 transform ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+          }`}
+          style={{ transitionDelay: isVisible ? '100ms' : '0ms' }}
+        >
           <span className="text-sm font-bold tracking-[0.2em] text-gray-300 border-b border-gray-500 pb-2">
             LATEST PROJECTS
           </span>
         </div>
 
         {/* Projects Grid */}
-        <div className={`max-w-7xl mx-auto pb-24 px-8 transition-all delay-500 ${isVisible ? 'animate-up' : 'hidden-pre'}`}>
+        <div className="max-w-7xl mx-auto pb-24 px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {PROJECTS.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+            {PROJECTS.map((project, index) => (
+              <ProjectCard 
+                key={project.id} 
+                project={project} 
+                index={index} 
+                isVisible={isVisible} 
+              />
             ))}
           </div>
 
-          <div className="text-center mt-20">
+          {/* Bottom Link */}
+          <div className={`text-center mt-20 transition-all duration-1000 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+          style={{ transitionDelay: isVisible ? '800ms' : '0ms' }}
+          >
             <Link href="/projects" className="inline-block group">
               <p className="text-gray-300 text-lg underline underline-offset-8 decoration-gray-500 group-hover:text-white group-hover:decoration-white transition-all">
                 See All Projects!

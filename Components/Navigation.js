@@ -103,7 +103,7 @@ export default function Navigation() {
         ${isOpen ? "translate-x-0" : "translate-x-full"}
       `}>
         {/* Menu Links */}
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-8 mb-12">
           <Link
           href="/"
           onClick={() => setIsOpen(false)}

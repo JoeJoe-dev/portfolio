@@ -1,7 +1,6 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Raleway } from "next/font/google"; // Combined imports
 import "./globals.css";
 import Navbar from '@/Components/Navigation';
-import { Raleway } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
@@ -14,17 +13,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "Joseph Kalu | Frontend Developer",
-  description: "Building Amazing Websites / Web Apps",
-  // Next.js will now automatically find your app/icon.js file
-};
-
 const raleway = Raleway({
   subsets: ["latin"],
   variable: "--font-raleway",
 });
 
+export const metadata = {
+  title: "Joseph Kalu | Frontend Developer",
+  description: "Building Amazing Websites / Web Apps",
+};
 
 export default function RootLayout({ children }) {
   return (

@@ -1,9 +1,50 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Download, Linkedin, Github } from "lucide-react";
+import { Download, Linkedin, Github, X, Eye } from "lucide-react"; // Added X and Eye
 import ContactSection from "@/Components/ContactSection";
 import Footer from "@/Components/Footer";
+
+// --- Resume Modal Component ---
+const ResumeModal = ({ isOpen, onClose, pdfUrl }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-10 animate-in fade-in duration-300">
+      <div className="relative w-full max-w-6xl h-full bg-[#1A1A1A] rounded-lg shadow-2xl flex flex-col overflow-hidden border border-white/10">
+        
+        {/* Header / Top Bar */}
+        <div className="flex items-center justify-between px-6 py-4 bg-[#252525] border-b border-white/5">
+          <div className="flex items-center gap-4">
+            <span className="text-gray-400 text-xs font-bold uppercase tracking-widest">My Resume / CV</span>
+            <a 
+              href={pdfUrl} 
+              download 
+              className="bg-[#2ecc71] hover:bg-[#27ae60] text-white px-4 py-1.5 rounded text-xs font-bold transition-colors flex items-center gap-2"
+            >
+              <Download size={14} /> Download
+            </a>
+          </div>
+          <button 
+            onClick={onClose}
+            className="bg-[#e74c3c] hover:bg-[#c0392b] text-white px-4 py-1.5 rounded text-xs font-bold transition-colors"
+          >
+            Close
+          </button>
+        </div>
+
+        {/* Content Area (As seen in your UI image) */}
+        <div className="flex-1 bg-[#333333] relative">
+          <iframe
+            src={`${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0`}
+            className="w-full h-full border-none shadow-inner"
+            title="Resume Viewer"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // Simple Reusable Animated Section Component
 const AnimatedSection = ({ children, delay = "0s" }) => {
@@ -41,6 +82,18 @@ const AnimatedSection = ({ children, delay = "0s" }) => {
 };
 
 export default function AboutPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const resumeUrl = "/documents/Joseph_Kalu_CV.pdf";
+
+  // Prevent background scrolling when modal is open
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isModalOpen]);
+
   const capabilities = [
     "HTML",
     "CSS3",
@@ -79,6 +132,13 @@ export default function AboutPage() {
       className="min-h-screen bg-[#D5D5D5] text-black font-sans pt-24 md:pt-32 overflow-x-hidden"
       id="about"
     >
+      {/* ADD MODAL COMPONENT */}
+      <ResumeModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        pdfUrl={resumeUrl} 
+      />
+
       <div className="max-w-10xl mx-auto md:px-12 lg:px-16">
         <div className="px-6">
           {/* Intro Section */}
@@ -102,13 +162,14 @@ export default function AboutPage() {
                 </p>
 
                 <div className="flex flex-wrap items-center gap-4 pt-4">
-                  <a
-                    href="/Joseph-Kalu-CV.pdf"
-                    download
-                    className="bg-black text-white px-6 md:px-8 py-3 rounded-full font-bold text-xs md:text-sm uppercase tracking-wide hover:bg-white hover:text-black border-2 border-black transition-all flex items-center gap-2"
+                  {/* UPDATED BUTTON: Instead of direct download, it opens the modal */}
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="bg-black text-white px-6 md:px-8 py-3 rounded-full font-bold text-xs md:text-sm uppercase 
+                    tracking-wide hover:bg-transparent hover:text-black border-2 border-black transition-all flex items-center gap-2"
                   >
-                    <Download size={18} /> Download CV
-                  </a>
+                    <Eye size={18} /> View CV
+                  </button>
                   <div className="flex gap-4">
                     <a
                       href="#"

@@ -130,7 +130,7 @@ export default function PortfolioSection() {
           }`}
           style={{ transitionDelay: isVisible ? '800ms' : '0ms' }}
           >
-            <Link href="/projects" className="inline-block group">
+            <Link href="/project" className="inline-block group">
               <p className="text-gray-300 text-lg underline underline-offset-8 decoration-gray-500 group-hover:text-white group-hover:decoration-white transition-all">
                 See All Projects!
               </p>

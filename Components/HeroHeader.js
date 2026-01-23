@@ -142,16 +142,16 @@ export default function HeroHeader() {
             Hi, I am
           </h3>
           <h1 className="text-5xl md:text-7xl font-bold text-black mb-2 tracking-tight animate-slide-left stagger-2">
-            Kalu Joseph
+            Maazjnr
           </h1>
           <p className="text-gray-500 font-[600] text-lg mb-8 animate-fade-up stagger-3">
-            Front-end Developer / Website Designer
+             I am a Self-Taught Web & Mobile developer based in Nigeria (West Africa)
           </p>
 
           {/* Refined Social Icons with Box Shadow */}
           <div className="flex gap-6 animate-fade-up stagger-4">
             <a
-              href="https://github.com/JoeJoe-dev"
+              href="https://github.com/maazjnr"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#C4C4C4] p-4 rounded-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 text-black"
@@ -159,7 +159,7 @@ export default function HeroHeader() {
               <Github size={24} />
             </a>
             <a
-              href="https://www.linkedin.com/in/joseph-kalu-934506237"
+              href="https://www.linkedin.com/in/maazjunior"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#C4C4C4] p-4 rounded-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 text-black"
@@ -167,7 +167,7 @@ export default function HeroHeader() {
               <Linkedin size={24} />
             </a>
             <a
-              href="https://x.com/JosephKalu001"
+              href="https://x.com/maazjnr7"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#C4C4C4] p-4 rounded-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 text-black"

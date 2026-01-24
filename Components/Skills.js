@@ -9,17 +9,23 @@ const tailwindcssIcon = '/assets/icons/tailwindcss.png';
 const bootstrapIcon = '/assets/icons/bootstrap.png';
 const javascriptIcon = '/assets/icons/js.png';
 const reactIcon = '/assets/icons/react.png';
+const reactNativeIcon = '/assets/icons/reactNative.png';
 const nextjsIcon = '/assets/icons/nextjs.png';
+const expoIcon = '/assets/icons/expo.png';
+const expressJsIcon = '/assets/icons/expressJs.png';
+const postgresqlIcon = '/assets/icons/postgresql.png';
 const gitIcon = '/assets/icons/git.png';
 const figmaIcon = '/assets/icons/figma.png';
 const nodejsIcon = '/assets/icons/node.png';
 const mysqlIcon = '/assets/icons/mysql.png';
 const mongodbIcon = '/assets/icons/mongodb.png';
 const typescriptIcon = '/assets/icons/typescript.png';
-const shadcnIcon = '/assets/icons/shadcn.png';
+const reduxIcon = '/assets/icons/redux.png';
+const zustandIcon = '/assets/icons/zustand.png';
+const postmanIcon = '/assets/icons/postman.png';
 const trelloIcon = '/assets/icons/trello.png';
 const jiraIcon = '/assets/icons/jira.png';
-const aiIcon = '/assets/icons/ai.png';
+
 
 // Small helper component for individual section animations
 const AnimatedSection = ({ title, skills, className = "" }) => {
@@ -55,10 +61,10 @@ useEffect(() => {
           : 'opacity-0 translate-y-20'
       } ${className}`}
     >
-      <h3 className="text-xl font-bold ml-[3.2rem] text-black mb-8 md:ml-[5.4rem] tracking-wide">
+      <h3 className="text-xl font-bold ml-[3.2rem] text-black mb-8 md:ml-[4rem] tracking-wide">
         {title}
       </h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
         {skills.map((skill, index) => (
           <div key={index} className="flex flex-col items-center">
             <div className="w-24 h-24 flex items-center justify-center mb-3">
@@ -84,23 +90,30 @@ export default function Skills() {
     { name: 'BOOTSTRAP', icon: bootstrapIcon },
     { name: 'JAVASCRIPT', icon: javascriptIcon },
     { name: 'REACT', icon: reactIcon },
+    { name: 'REACT NATIVE', icon: reactNativeIcon },
+    { name: 'EXPO', icon: expoIcon },
     { name: 'NEXT.JS', icon: nextjsIcon },
+    { name: 'NODE.JS', icon: nodejsIcon },
+    { name: 'MONGODB', icon: mongodbIcon },
+    { name: 'EXPRESS JS', icon: expressJsIcon },
+    { name: 'POSTGRESQL', icon: postgresqlIcon },
     { name: 'GIT', icon: gitIcon },
     { name: 'FIGMA', icon: figmaIcon },
   ];
 
   const learningSkills = [
-    { name: 'NODEJS', icon: nodejsIcon },
+    
     { name: 'MySQL', icon: mysqlIcon },
-    { name: 'MONGODB', icon: mongodbIcon },
+    
     { name: 'TYPESCRIPT', icon: typescriptIcon },
   ];
 
   const otherSkills = [
-    { name: 'SHADCN UI', icon: shadcnIcon },
+    { name: 'REDUX', icon: reduxIcon },
+    { name: 'ZUSTAND', icon: zustandIcon },
+    { name: 'POSTMAN', icon: postmanIcon },
     { name: 'TRELLO', icon: trelloIcon },
     { name: 'JIRA', icon: jiraIcon },
-    { name: 'AI', icon: aiIcon },
   ];
 
   return (

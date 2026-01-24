@@ -141,11 +141,11 @@ export default function HeroHeader() {
           <h3 className="text-xl font-bold text-gray-800 mb-10 animate-fade-up stagger-1">
             Hi, I am
           </h3>
-          <h1 className="text-5xl md:text-7xl font-bold text-black mb-2 tracking-tight animate-slide-left stagger-2">
+          <h1 className="text-5xl md:text-7xl font-bold text-black mb-5 tracking-tight animate-slide-left stagger-2 md:ml-[-.3rem]">
             Maazjnr
           </h1>
           <p className="text-gray-500 font-[600] text-lg mb-8 animate-fade-up stagger-3">
-             I am a Self-Taught Web & Mobile developer based in Nigeria (West Africa)
+             I am a Self-Taught Web & Mobile developer <br /> based in Nigeria (West Africa)
           </p>
 
           {/* Refined Social Icons with Box Shadow */}
@@ -188,7 +188,7 @@ export default function HeroHeader() {
         {/* Image Area - Desktop */}
         <div className="w-full md:w-1/2 h-full flex items-end justify-center relative mt-[-10rem]">
           <img
-            src="/assets/Images/Heroheader_img(2).png"
+            src="/assets/Images/maaz.jpg"
             alt="Kalu Joseph"
             className="h-[80vh] object-contain z-30 animate-slide-right rounded-full"
           />
@@ -200,14 +200,14 @@ export default function HeroHeader() {
         {/* Full 100vh Image Background - Zoom In Animation */}
         <div className="absolute inset-0 w-full h-screen">
           <img
-            src="/assets/Images/Heroheader_img(2).png"
+            src="/assets/Images/maaz.jpg"
             alt="Kalu Joseph"
             className="w-full h-full object-cover object-top mobile-image-zoom"
           />
         </div>
 
         {/* Slanted Semi-Transparent Dark Overlay at Bottom - Slide Up Animation */}
-        <div className="absolute bottom-0 left-0 right-0 h-[17rem] bg-black/40 slanted-overlay mobile-overlay-slide overflow-hidden">
+        <div className="absolute bottom-[-1rem] left-0 right-0 h-[19rem] bg-black/40 slanted-overlay mobile-overlay-slide overflow-hidden">
           {/* Subtle gradient to ensure text pops against the background image */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
@@ -218,10 +218,10 @@ export default function HeroHeader() {
                 Hi, I am
               </p>
               <h1 className="text-4xl font-bold text-white mb-1 leading-tight mobile-text-fade mobile-stagger-2">
-                Kalu Joseph
+                Maazjnr
               </h1>
               <p className="text-[1rem] font-bold text-gray-200 mobile-text-fade mobile-stagger-3">
-                Front-end Developer / Website Designer
+                I am a Self-Taught Web & Mobile developer <br /> based in Nigeria (West Africa)
               </p>
             </div>
 

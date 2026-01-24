@@ -7,15 +7,15 @@ export default function ITberries() {
         <div className="mb-8">
           {/* Smaller, Title Case, and Different Weight */}
           <h2 className="text-sm md:text-base font-medium tracking-[0.2em] text-gray-400 capitalize mb-1">
-            Building Amazing
-          </h2> 
+            Self-taught • iOS • Android • Web 
+          </h2>
           {/* Main bold heading */}
-          <h1 className="text-2xl md:text-4xl font-bold tracking-[0.1em] uppercase">
-            Websites / Web Apps
+          <h1 className="text-2xl md:text-xl font-bold tracking-[0.1em] uppercase">
+            Helping startups & businesses create powerful apps and websites 
           </h1>
         </div>
 
-        <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 max-w-2xl">
+        {/* <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-8 max-w-2xl">
           I build high-quality websites that give you total control and
           eliminate the need for expensive technical help later on. For
           organizations and businesses, I deliver clean, professional work that
@@ -24,12 +24,12 @@ export default function ITberries() {
           My goal is to ensure your digital home is secure and reliable, so you
           can focus on your mission without worrying about your website breaking
           or failing after it launches.
-        </p>
+        </p> */}
 
         <div className="flex items-center gap-4">
           <div className="h-[1px] w-8 bg-gray-500"></div>
           <button className="text-xs font-bold tracking-widest hover:text-gray-400 transition uppercase">
-            Joseph Kalu
+            📍Tech • Madridista • Islam
           </button>
           <div className="h-[1px] w-8 bg-gray-500"></div>
         </div>

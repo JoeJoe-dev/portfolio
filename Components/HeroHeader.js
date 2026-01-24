@@ -15,7 +15,7 @@ export default function HeroHeader() {
             transform: translateX(0);
           }
         }
-        
+No        
         @keyframes slideInRight {
           from {
             opacity: 0;

@@ -141,6 +141,7 @@ export default function HeroHeader() {
           <h3 className="text-xl font-bold text-gray-800 mb-10 animate-fade-up stagger-1">
             Hi, I am
           </h3>
+<<<<<<< HEAD
           <h1 className="text-5xl md:text-7xl font-bold text-black mb-5 tracking-tight animate-slide-left stagger-2 md:ml-[-.3rem]">
             Maazjnr
           </h1>
@@ -151,7 +152,7 @@ export default function HeroHeader() {
           {/* Refined Social Icons with Box Shadow */}
           <div className="flex gap-6 animate-fade-up stagger-4">
             <a
-              href="https://github.com/maazjnr"
+              href="https://github.com/JoeJoe-dev"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#C4C4C4] p-4 rounded-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 text-black"
@@ -159,7 +160,7 @@ export default function HeroHeader() {
               <Github size={24} />
             </a>
             <a
-              href="https://www.linkedin.com/in/maazjunior"
+              href="https://www.linkedin.com/in/joseph-kalu-934506237"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#C4C4C4] p-4 rounded-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 text-black"
@@ -167,7 +168,7 @@ export default function HeroHeader() {
               <Linkedin size={24} />
             </a>
             <a
-              href="https://x.com/maazjnr7"
+              href="https://x.com/JosephKalu001"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#C4C4C4] p-4 rounded-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-200 text-black"

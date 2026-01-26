@@ -73,7 +73,7 @@ export default function ProjectPage() {
       id: 5,
       title: "KlinTech Website",
       description: "HTML5, CSS3, JS",
-      image: "/assets/Images/KlinTech.jpg",
+      image: "/assets/Images/Klintech.jpg",
       demoLink: "https://klintech-hub-123.vercel.app",
     },
   ];

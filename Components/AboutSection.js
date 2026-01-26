@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { Smartphone, TabletSmartphone, Globe } from "lucide-react";
+import { Palette, Code, Wrench } from "lucide-react";
 import Link from "next/link";
 
 export default function AboutSection() {
@@ -13,10 +13,10 @@ export default function AboutSection() {
         // This triggers when the user scrolls the section into view
         setIsVisible(entry.isIntersecting);
       },
-      {
+      { 
         threshold: 0.1, // Trigger when 10% of the section is visible
-        rootMargin: "0px 0px -100px 0px", // Slight offset so it feels more natural
-      },
+        rootMargin: "0px 0px -100px 0px" // Slight offset so it feels more natural
+      }
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
@@ -24,11 +24,7 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="bg-[#D5D5D5] py-20 px-8 font-sans overflow-hidden"
-      id="about"
-    >
+    <section ref={sectionRef} className="bg-[#D5D5D5] py-20 px-8 font-sans overflow-hidden" id="about">
       <style>{`
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(50px); }
@@ -42,7 +38,7 @@ export default function AboutSection() {
         /* The logic: only run animation if isVisible is true */
         .scroll-trigger { 
           opacity: 0;
-          animation: ${isVisible ? "fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards" : "fadeOutDown 0.6s ease-in forwards"};
+          animation: ${isVisible ? 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards' : 'fadeOutDown 0.6s ease-in forwards'};
         }
 
         .delay-1 { animation-delay: 0.1s; }
@@ -60,21 +56,15 @@ export default function AboutSection() {
         {/* Title */}
         <div className="flex justify-center mb-12 scroll-trigger delay-1">
           <div className="border-4 border-black px-12 py-4">
-            <h2 className="text-2xl font-bold tracking-[0.3em] text-black uppercase">
-              About Me
-            </h2>
+            <h2 className="text-2xl font-bold tracking-[0.3em] text-black uppercase">About Me</h2>
           </div>
         </div>
 
         {/* Description */}
         <p className="text-center text-base text-black leading-relaxed mb-8 max-w-2xl mx-auto scroll-trigger delay-2">
-          I&apos;m well known as Maaz, I am a Self-Taught Web & Mobile developer
-          based in Nigeria. I&apos;m a passionate programmer who love to build
-          useful software an solve technical problems with my skills. I also
-          possess excellent problem-solving skills, attention to detail, and a
-          commitment to meeting deadlines. I am a quick learner and always eager
-          to expand my skillset to take on new challenges and improve my
-          abilities.
+          I&apos;m Kalu Joseph, a creative Frontend Developer and Website Designer based in Nigeria. 
+          I build high-performance digital homes that balance technical excellence for recruiters with 
+          total narrative control for business owners.
         </p>
 
         {/* Explore Button */}
@@ -90,42 +80,30 @@ export default function AboutSection() {
 
         {/* Services Grid - Only slides up when section isVisible */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-20 w-full px-4">
-          {/* iOS Development */}
           <div className="text-center scroll-trigger grid-delay-1">
-            <ServiceIcon Icon={Smartphone} />
-            <h3 className="text-xl font-bold text-black mb-4 tracking-wide uppercase">
-              iOS Development
-            </h3>
+            <ServiceIcon Icon={Palette} />
+            <h3 className="text-xl font-bold text-black mb-4 tracking-wide uppercase">Web Design</h3>
             <p className="text-sm text-black leading-relaxed lg:text-justify">
-              I build clean, intuitive iPhone apps that feel right at home in a
-              user's hand. My focus is on creating smooth experiences that make
-              your brand a seamless part of their daily routine.
+              I deliver high-performance designs that prioritize systematic consistency for teams 
+              and total narrative control for business owners.
             </p>
           </div>
 
-          {/* Android Development */}
           <div className="text-center scroll-trigger grid-delay-2">
-            <ServiceIcon Icon={TabletSmartphone} />
-            <h3 className="text-xl font-bold text-black mb-4 tracking-wide uppercase">
-              Android Development
-            </h3>
+            <ServiceIcon Icon={Code} />
+            <h3 className="text-xl font-bold text-black mb-4 tracking-wide uppercase">Web Development</h3>
             <p className="text-sm text-black leading-relaxed lg:text-justify">
-              I develop versatile Android applications designed to perform
-              across the vast world of devices. I make sure your service stays
-              fast, accessible, and reliable for every single user.
+              I write modular, industry-standard code, ensuring your platform 
+              is easy to scale and built to convert.
             </p>
           </div>
 
-          {/* Web Development */}
           <div className="text-center scroll-trigger grid-delay-3 md:col-span-2 lg:col-span-1">
-            <ServiceIcon Icon={Globe} />
-            <h3 className="text-xl font-bold text-black mb-4 tracking-wide uppercase">
-              Web Development
-            </h3>
+            <ServiceIcon Icon={Wrench} />
+            <h3 className="text-xl font-bold text-black mb-4 tracking-wide uppercase">Web Maintenance</h3>
             <p className="text-sm text-black leading-relaxed max-w-md mx-auto lg:max-w-none lg:text-justify">
-              I create dedicated home bases that give you total control over
-              your narrative. From clean landing pages to complex web apps, I
-              build digital spaces that actually help you grow.
+              I handle technical health and performance optimization, ensuring your professional 
+              digital environment remains secure and fast.
             </p>
           </div>
         </div>

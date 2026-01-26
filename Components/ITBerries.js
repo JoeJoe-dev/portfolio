@@ -8,7 +8,7 @@ export default function ITberries() {
           {/* Smaller, Title Case, and Different Weight */}
           <h2 className="text-sm md:text-base font-medium tracking-[0.2em] text-gray-400 capitalize mb-1">
             Building Amazing
-          </h2> 
+          </h2>
           {/* Main bold heading */}
           <h1 className="text-2xl md:text-4xl font-bold tracking-[0.1em] uppercase">
             Websites / Web Apps
@@ -29,7 +29,7 @@ export default function ITberries() {
         <div className="flex items-center gap-4">
           <div className="h-[1px] w-8 bg-gray-500"></div>
           <button className="text-xs font-bold tracking-widest hover:text-gray-400 transition uppercase">
-            Joseph Kalu
+            📍Tech • Madridista • Islam
           </button>
           <div className="h-[1px] w-8 bg-gray-500"></div>
         </div>

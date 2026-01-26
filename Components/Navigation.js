@@ -63,7 +63,7 @@ export default function Navigation() {
           className="text-xl md:text-2xl font-bold tracking-tighter z-50"
         >
           <span className="px-2 py-1 text-white md:text-black">
-            Kalu Joseph
+            Joseph Kalu
           </span>
         </Link>
 

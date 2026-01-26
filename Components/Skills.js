@@ -11,7 +11,8 @@ const javascriptIcon = '/assets/icons/js.png';
 const reactIcon = '/assets/icons/react.png';
 const nextjsIcon = '/assets/icons/nextjs.png';
 const gitIcon = '/assets/icons/git.png';
-const figmaIcon = '/assets/icons/figma.png';
+const wordpressIcon = '/assets/icons/wordpress.png';
+const hostingerIcon = '/assets/icons/hostinger.png';
 const nodejsIcon = '/assets/icons/node.png';
 const mysqlIcon = '/assets/icons/mysql.png';
 const mongodbIcon = '/assets/icons/mongodb.png';
@@ -85,8 +86,9 @@ export default function Skills() {
     { name: 'JAVASCRIPT', icon: javascriptIcon },
     { name: 'REACT', icon: reactIcon },
     { name: 'NEXT.JS', icon: nextjsIcon },
+    { name: 'WORDPRESS', icon: wordpressIcon },
+    { name: 'HOSTINGER', icon: hostingerIcon },
     { name: 'GIT', icon: gitIcon },
-    { name: 'FIGMA', icon: figmaIcon },
   ];
 
   const learningSkills = [
